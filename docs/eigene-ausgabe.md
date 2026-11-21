@@ -1,8 +1,10 @@
 # Deine Website mit ChatGPT einrichten
 
-## Mit einer funktionierenden Vorlage beginnen
+## Mit dem Vorbild beginnen
 
-Lade das [Newsfeed-OS-Paket](demos/Newsfeed-OS.zip?raw=true) herunter. Nach dem Entpacken öffnest du **Stadtlabor.html** oder **Orbitbrief.html** im Browser. Beide Beispiele enthalten echte Meldungen und Quellen. Du kannst sofort suchen, das Archiv öffnen und die Themenfilter ausprobieren.
+Öffne [Patientensteuerung.org](https://patientensteuerung.org/). Suche eine Meldung, wähle ein Thema und folge dem Link zur Quelle. Diesen Aufbau übernimmst du für deine eigene Website.
+
+Lade das [Newsfeed-OS-Paket](demos/Newsfeed-OS.zip?raw=true) herunter. Darin liegen die bearbeitbare Vorlage und zwei Beispiele für andere Themen. Nach dem Entpacken kannst du **Stadtlabor.html** für Stadtentwicklung oder **Orbitbrief.html** für Raumfahrt direkt im Browser öffnen.
 
 Für deine eigene Ausgabe öffnest du [ChatGPT](https://chatgpt.com/) und wählst **Work**. Füge das Vorlagenpaket hinzu und nutze den [Startauftrag aus der README](../README.md#deine-eigene-website-mit-chatgpt-starten). Wenn dein Chat das ZIP nicht öffnen kann, öffne den entpackten Ordner **vorlage** als lokales Projekt in der ChatGPT-Desktop-App und gib dort denselben Auftrag ein. Das Werkzeug **Sites** erstellt und hostet die Website. [OpenAI-Anleitung zu Sites](https://learn.chatgpt.com/docs/sites/creating-a-site)
 
