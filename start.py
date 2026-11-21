@@ -20,7 +20,8 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parent
 CURRENT = OrderedDict()
 LOCK = threading.Lock()
-RESOURCES = {"site.json", "index.html"}
+RESOURCES = {"site.json", "index.html", "docs/demos/Stadtlabor.html",
+             "docs/demos/Orbitbrief.html", "docs/demos/Newsfeed-OS.zip"}
 
 
 def encode_json(value):

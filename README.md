@@ -1,32 +1,36 @@
 # <img src="werkstatt/newsfeed-os.svg" width="32" alt="" align="absmiddle"> Newsfeed OS
 
-Baue eine Nachrichtenseite für ein Thema, das du regelmäßig verfolgst. Du bestimmst, welche Quellen und Meldungen hineingehören. Deine Leser finden die neuesten Beiträge auf der Startseite, können das Archiv durchsuchen und mit einem Klick die Originalquelle öffnen.
+Mit Newsfeed OS erstellst du in ChatGPT eine Nachrichtenseite zu deinem Thema. Du wählst Name, Gestaltung und Quellen. Deine Leser können Meldungen durchsuchen, nach Themen filtern und die Originalquelle öffnen. Das Vorbild ist [Patientensteuerung.org](https://patientensteuerung.org/).
 
-**Stadtlabor** zeigt eine Ausgabe zur Stadtentwicklung. Der Aufbau stammt von [Patientensteuerung.org](https://patientensteuerung.org/).
+## Stadtlabor ausprobieren
 
-<a href="docs/startseite.png"><picture><source media="(max-width: 600px)" srcset="docs/mobil.png"><img src="docs/startseite.png" alt="Startseite von Stadtlabor mit Suche, Filtern und aktuellen Meldungen zur Stadtentwicklung"></picture></a>
+**[Stadtlabor in ChatGPT Sites öffnen](https://stadtlabor-newsfeed-demo.timofrank.chatgpt.site)** · [Beide Beispiele herunterladen](docs/demos/Newsfeed-OS.zip?raw=true)
 
-[Zweites Design für Raumfahrt](docs/orbitbrief.png) · [Mobile Ansicht](docs/mobil.png) · [Themeneinstieg Stadtgrün](docs/thema-stadtgruen.png) · [Einzelne Meldung](docs/meldung.png)
+Die Webadresse ist nur für den Inhaber dieser Demo zugänglich. Mit dem Download kannst du beide Beispiele direkt auf deinem Rechner ausprobieren. Entpacke das Paket und öffne **Stadtlabor.html** oder **Orbitbrief.html** im Browser. Suche in Stadtlabor zum Beispiel nach **Hopfenmarkt** und öffne die Meldung.
 
-## Deine eigene Ausgabe starten
+<a href="https://stadtlabor-newsfeed-demo.timofrank.chatgpt.site"><picture><source media="(max-width: 600px)" srcset="docs/mobil.png"><img src="docs/startseite.png" alt="Stadtlabor mit Suche, Themenfiltern und Meldungen zur Stadtentwicklung. Öffnet die private Demo."></picture></a>
 
-1. Klicke auf GitHub auf **Use this template** und lade deine Kopie herunter. Zum Ausprobieren genügt auch **Code → Download ZIP**. Entpacke das ZIP.
-2. Öffne ein Terminal im Projektordner und starte die Vorschau mit Python ab 3.9.
+[Startseite als Bild ansehen](docs/startseite.png) · [Mobile Vorschau](docs/mobil.png)
 
-   ```sh
-   python3 start.py
-   ```
+## Deine eigene Website mit ChatGPT starten
 
-3. Öffne [Eigene Ausgabe einrichten](http://127.0.0.1:8765/einrichten/). Wähle Name, Logo, Farben und Themen. Mit **Website herunterladen** erhältst du die fertige Website für deinen Webserver.
+1. Lade das [Vorlagenpaket](docs/demos/Newsfeed-OS.zip?raw=true) herunter. Öffne [ChatGPT](https://chatgpt.com/), wähle **Work** und füge das Paket und, falls vorhanden, dein Logo hinzu.
+2. Kopiere den Auftrag unten und ersetze **[mein Thema]**. ChatGPT richtet die Website mit dir ein und übernimmt das Hosting über **Sites**.
+3. Öffne den privaten Link, den ChatGPT dir gibt. Prüfe die Startseite, die Filter und eine Originalquelle. Weitere Wünsche kannst du im selben Chat beschreiben.
 
-| So gestaltest du deine Ausgabe | So finden Leser passende Meldungen |
+```text
+@Sites, erstelle aus der angehängten Newsfeed-OS-Vorlage eine eigene Website
+für [mein Thema]. Verwende die Website im Ordner vorlage/ als Ausgangspunkt.
+Frag mich nach Name, Zielgruppe und Quellen. Stimme Logo, Farben und Themen
+mit mir ab. Übernimm Suche, Archiv und Quellenlinks. Entferne die Beispielmeldungen
+und zeige mir einen ersten Beitrag aus einer meiner Quellen zur Prüfung.
+Hoste die Website zunächst nur für mich und gib mir den geprüften Link.
+```
+
+[Eigene Ausgabe gestalten, hosten und pflegen](docs/eigene-ausgabe.md) · [Recherche in ChatGPT automatisieren](docs/quellen-beobachten.md)
+
+| Zwei Designs für dieselbe Vorlage | So sehen die Filter aus |
 | --- | --- |
-| [![Einrichtung mit Logo, Farbwahl und Vorschau der eigenen Website](docs/einrichten.png)](docs/einrichten.png) | [![Archiv mit ausgewähltem Bereich, Thema und Datumsbereich](docs/filter.png)](docs/filter.png) |
+| [![Stadtlabor und Orbitbrief im direkten Vergleich](docs/ausgaben.png)](docs/ausgaben.png) | [![Archiv mit ausgewähltem Thema und Zeitraum](docs/filter.png)](docs/filter.png) |
 
-[Die erste eigene Meldung eintragen und veröffentlichen](docs/eigene-ausgabe.md#die-erste-meldung-ver%C3%B6ffentlichen)
-
-## Neue Meldungen automatisch finden
-
-Für den **Orbitbrief** kann ein Rechercheagent zum Beispiel jeden Werktag um 08:30 Uhr die Nachrichten von ESA und DLR lesen. Er öffnet die Originalquellen, vergleicht sie mit den vorhandenen Meldungen und schlägt neue oder geänderte Beiträge vor. Du entscheidest, welche davon auf deiner Website erscheinen.
-
-Die [Anleitung zur automatischen Recherche](docs/quellen-beobachten.md) zeigt, wie du Quellen und Zeitplan festlegst, einen ersten Lauf prüfst und die Ergebnisse in deinen Feed übernimmst. Den Beispielauftrag kannst du kopieren.
+Weitere Vorschaubilder findest du für das [Archiv](docs/archiv.png), die [Themenübersicht](docs/themen.png), das Thema [Stadtgrün](docs/thema-stadtgruen.png) und eine [einzelne Meldung](docs/meldung.png).

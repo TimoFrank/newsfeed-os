@@ -1,32 +1,31 @@
-# Eine eigene Ausgabe einrichten
+# Deine Website mit ChatGPT einrichten
 
-## Ausprobieren
+## Mit einer funktionierenden Vorlage beginnen
 
-Starte im heruntergeladenen oder geklonten Repository `python3 start.py`. Öffne dann [Stadtlabor](http://127.0.0.1:8765/) oder [Orbitbrief](http://127.0.0.1:8765/?profil=orbit). Beide Beispiele enthalten eine feste Auswahl datierter, öffentlich belegter Meldungen. Über **Zur Quelle** gelangst du zur jeweiligen Veröffentlichung.
+Lade das [Newsfeed-OS-Paket](demos/Newsfeed-OS.zip?raw=true) herunter. Nach dem Entpacken öffnest du **Stadtlabor.html** oder **Orbitbrief.html** im Browser. Beide Beispiele enthalten echte Meldungen und Quellen. Du kannst sofort suchen, das Archiv öffnen und die Themenfilter ausprobieren.
 
-## Name, Logo und Themen wählen
+Für deine eigene Ausgabe öffnest du [ChatGPT](https://chatgpt.com/) und wählst **Work**. Füge das Vorlagenpaket hinzu und nutze den [Startauftrag aus der README](../README.md#deine-eigene-website-mit-chatgpt-starten). Wenn dein Chat das ZIP nicht öffnen kann, öffne den entpackten Ordner **vorlage** als lokales Projekt in der ChatGPT-Desktop-App und gib dort denselben Auftrag ein. Das Werkzeug **Sites** erstellt und hostet die Website. [OpenAI-Anleitung zu Sites](https://learn.chatgpt.com/docs/sites/creating-a-site)
 
-1. Öffne [Eigene Ausgabe einrichten](http://127.0.0.1:8765/einrichten/). Wähle eine der beiden Ausgaben als Ausgangspunkt.
-2. Trage Namen, Überschrift und Einleitung ein. Wähle Schriftstil, Motiv und Farben. Lade dein Logo als PNG oder JPEG hoch. Bei einer Wortmarke aktiviere **Mein Logo enthält bereits den Namen**.
-3. Trage unter **Themen und Meldungen** die gewünschten Bereiche und Themen ein. Jede Meldung gehört zu genau einem Bereich und kann mehrere Themen haben. Für einen leeren Start entferne das Häkchen bei **Beispielmeldungen in meine Ausgabe übernehmen**.
-4. Ergänze unter **Herausgeber und Links** die Angaben deiner Redaktion und bei Bedarf Links zu Impressum, Datenschutz oder einem vorhandenen Newsletter. Prüfe die Ausgabe mit **Vorschau aktualisieren**.
-5. Wähle **Website herunterladen**. Entpacke das ZIP. Es enthält deine Ausgabe, die bearbeitbaren Inhalte und alle Dateien für den Webserver.
+## Die Gestaltung festlegen
 
-[![Einrichtung und Vorschau einer Ausgabe](einrichten.png)](einrichten.png)
+Sage ChatGPT, für wen du schreibst, welcher Name oben stehen soll und welche Quellen du beobachten möchtest. Ein Logo kannst du im Chat hinzufügen. So könnte deine Antwort aussehen.
+
+> Meine Ausgabe heißt Bibliotheksblick. Sie richtet sich an Menschen, die Stadtbibliotheken gestalten. Ich möchte die Bereiche Praxis und Forschung sowie die Themen Leseförderung und digitale Angebote. Nimm warme Farben und eine gut lesbare Schrift. Frag mich nach meinen Quellen, bevor du Meldungen aufnimmst.
+
+Öffne die Vorschau. Änderungen kannst du direkt beschreiben, etwa „Mach die Überschrift auf dem Handy kleiner und zeige mir danach die mobile Startseite.“
+
+## Hosting und eigene Webadresse
+
+Bitte ChatGPT um privates Hosting. „Hoste diese Ausgabe mit Sites. Stelle den Zugriff auf **Nur ich** und gib mir die funktionierende Webadresse.“ Öffne den Link mit deinem ChatGPT-Konto und probiere eine Suche aus. Sites übernimmt den Betrieb. Den Zugriff kannst du später in den Website-Einstellungen ändern. [Zugriff und Freigabe](https://learn.chatgpt.com/docs/sites/publishing-and-sharing)
+
+Wenn du schon eine eigene Webadresse besitzt, nenne sie im selben Chat und frag nach den Einträgen für deinen Domainanbieter. Sind eigene Domains für dein Konto verfügbar, zeigt Sites dir diese Einträge an. Danach kannst du die Verbindung in Sites prüfen. [Eigene Domain verbinden](https://learn.chatgpt.com/docs/sites/managing-a-site#connect-a-custom-domain)
 
 ## Die erste Meldung veröffentlichen
 
-Im entpackten Paket beschreibt `profiles/ausgabe.json` deine Website. Dort findest du unter `sections` die Kennungen der Bereiche und unter `topics` die Kennungen der Themen. Im Feed stehen die Beiträge. Ein Beispiel aus dem Stadtlabor zeigt die [vollständige Datenstruktur](../feeds/stadtlabor.json).
+Schicke ChatGPT den Link zu einer Originalquelle und diesen Auftrag.
 
-1. Öffne `feeds/meldungen.json`. Für den ersten Beitrag kannst du einen Eintrag aus dem Beispiel übernehmen. Belasse die äußeren eckigen Klammern. Zwischen zwei Beiträgen steht ein Komma.
-2. Gib dem Beitrag eine eindeutige, dauerhafte `id`, etwa `neuer-stadtplatz`. Ergänze `title`, `summary`, `body` und das Veröffentlichungsdatum als `YYYY-MM-DD`. Trage bei `section` eine Bereichskennung und bei `topics` die passenden Themenkennungen ein. Unter `source` stehen Name und URL der Originalquelle.
-3. Starte im entpackten Ordner `python3 -m http.server 8000 --bind 127.0.0.1` und öffne [die lokale Ansicht](http://127.0.0.1:8000/). Prüfe den neuen Beitrag im Archiv und öffne die Originalquelle.
-4. Zum Veröffentlichen kopierst du den Inhalt des entpackten Ordners in das Webverzeichnis deiner Domain oder eines Unterpfads. Neue Beiträge erscheinen, sobald du die geänderte Feeddatei dort bereitstellst. Python wird nur für die lokale Vorschau benötigt.
+> Lies diese Veröffentlichung. Schlage mir einen kurzen Titel, eine Zusammenfassung, das Veröffentlichungsdatum und ein passendes Thema vor. Zeige mir den Entwurf mit dem Link zur Quelle.
 
-Wenn dein Redaktionssystem bereits JSON bereitstellt, kannst du im Profil bei `feed` auch dessen URL im selben Datenformat eintragen. Bei einem anderen Ursprung muss der Datenanbieter Browserzugriffe von deiner Website über CORS zulassen. Die Reihenfolge ergibt sich aus dem Datum.
+Wenn der Text stimmt, gib ihn frei. „Übernimm die Meldung in meine bestehende Ausgabe. Aktualisiere die Website mit denselben Zugriffseinstellungen und prüfe, ob die Meldung im Archiv auffindbar ist.“ Unter **Alle Meldungen** kannst du den Titel suchen und mit **Zur Quelle** das Original öffnen.
 
-## Profile direkt bearbeiten
-
-Im Vorlagenrepository wählt [site.json](../site.json) den Standard. Jedes registrierte Profil hat eine eigene JSON-Datei, einen öffentlichen Feed und optional ein Logo. Kopiere für eine weitere Ausgabe beispielsweise das [Stadtlabor-Profil](../profiles/stadtlabor.json), passe den Feedpfad an und trage die neue Profilkennung in `site.json` ein. Ein Link mit `?profil=deine-kennung` öffnet die Ausgabe. Einmal geteilte Meldungslinks bleiben beim Ändern eines Titels gültig, solange Profilkennung und Meldungskennung gleich bleiben.
-
-[Zurück zur Übersicht](../README.md)
+Für einen regelmäßigen Überblick kannst du ChatGPT beauftragen, ausgewählte Quellen an festen Wochentagen zu durchsuchen und dir neue Meldungen vorzuschlagen. [Auftrag zur automatischen Recherche](quellen-beobachten.md)

@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Neue Wege, grüne Quartiere und öffentliche Plätze im Wandel.">
+  <meta name="theme-color" content="#174b40">
+  <title>Stadtlabor</title>
+  <link rel="icon" id="site-icon" href="data:,">
+  <style>
+/* Profile tokens. The journal and atlas editions share their navigation and feed. */
+:root {
+  --primary: #174c40;
+  --accent: #a84528;
+  --ink: #172e29;
+  --tint: #eff2e9;
+  --paper: #fff;
+  --surface: #fafaf7;
+  --muted: color-mix(in srgb, var(--ink) 74%, #788078);
+  --line: color-mix(in srgb, var(--primary) 17%, white);
+  --strong-line: color-mix(in srgb, var(--primary) 38%, white);
+  --soft: color-mix(in srgb, var(--tint) 62%, white);
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --content-width: 1200px;
+  --radius: 8px;
+  color-scheme: light;
+  font-family: var(--sans);
+  font-synthesis: none;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { min-width: 0; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+main { flex: 1; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+button, input, select { font: inherit; color: inherit; }
+button, select { cursor: pointer; }
+img, svg { vertical-align: middle; }
+img { max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { overflow-wrap: break-word; }
+[hidden] { display: none !important; }
+.icon { display: inline-block; width: 17px; height: 17px; flex: none; }
+.wrap { width: min(calc(100% - 96px), var(--content-width)); margin-inline: auto; }
+
+.skip-link {
+  position: absolute; z-index: 10; left: 14px; top: 10px; transform: translateY(-155%);
+  padding: 10px 16px; border-radius: 4px; background: var(--primary); color: white;
+}
+.skip-link:focus { transform: none; }
+
+.site-header { position: relative; z-index: 1; background: var(--paper); border-bottom: 1px solid var(--line); }
+.header-inner { min-height: 75px; display: flex; align-items: center; gap: 36px; }
+.brand { display: inline-flex; gap: 10px; align-items: center; width: fit-content; min-width: 0; color: var(--primary); }
+.brand-mark { width: 37px; height: 37px; object-fit: contain; flex: none; }
+.brand-wordmark, .brand-mark.brand-wordmark { width: auto; height: 36px; max-width: min(300px,100%); object-fit: contain; }
+.brand-name { font: 700 31px/.98 var(--display); letter-spacing: -.075em; }
+.main-nav { margin-left: auto; display: flex; gap: clamp(16px, 2.4vw, 36px); align-items: stretch; align-self: stretch; }
+.main-nav a, .about-link { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; font-size: 14px; line-height: 1.25; font-weight: 540; }
+.main-nav a { position: relative; padding: 3px 0 0; color: var(--muted); }
+.main-nav a:hover, .about-link:hover { color: var(--accent); }
+.main-nav [aria-current="page"] { color: var(--primary); font-weight: 680; }
+.main-nav [aria-current="page"]::after { position: absolute; content: ""; height: 3px; background: var(--accent); inset: auto 0 0; }
+.about-link { min-height: 44px; gap: 6px; color: var(--primary); }
+.about-link::before { content: ""; width: 1px; height: 19px; background: var(--line); margin-right: 14px; }
+.about-link[aria-current="page"] { color: var(--accent); }
+
+.hero { position: relative; overflow: hidden; background: var(--tint); border-bottom: 1px solid var(--line); }
+.hero-inner { position: relative; isolation: isolate; display: flex; align-items: center; min-height: 175px; padding-block: 27px 30px; }
+.hero-copy { position: relative; z-index: 1; width: 68%; }
+.eyebrow {
+  margin: 0 0 12px; color: var(--primary); font: 670 10.5px/1.4 var(--sans);
+  text-transform: uppercase; letter-spacing: .145em;
+}
+h1, .hero h1 { color: var(--primary); font: 500 clamp(37px, 3.6vw, 56px)/1.04 var(--display); letter-spacing: -.046em; }
+.hero h1 em { color: var(--accent); font-weight: inherit; }
+.intro { margin-top: 12px; max-width: 61ch; color: var(--ink); font-size: 15px; line-height: 1.55; }
+.hero-art { position: absolute; z-index: 0; inset: 0 -2% 0 auto; width: 39%; overflow: hidden; pointer-events: none; mask-image: linear-gradient(to right, transparent 0%, black 18%, black 95%, transparent 100%); }
+:root:not([data-artwork="stadtplan"]):not([data-artwork="umlaufbahn"]) .hero-art { display: none; }
+:root:not([data-artwork="stadtplan"]):not([data-artwork="umlaufbahn"]) .hero-copy { width: 100%; }
+.hero-art::before, .hero-art::after { position: absolute; content: ""; inset: -10% 0; mask-size: cover; mask-position: center; mask-repeat: no-repeat; }
+.hero-art::before { background: var(--primary); opacity: .34; }
+.hero-art::after { background: var(--accent); opacity: .78; }
+
+.main-content { padding-block: 23px 56px; }
+.filterbar { display: grid; grid-template-columns: minmax(230px, 1.76fr) repeat(3, minmax(0,1fr)); gap: 10px; align-items: end; }
+.field { display: flex; flex-direction: column; min-width: 0; gap: 5px; }
+.field-label { color: var(--muted); font: 600 11px/1.4 var(--sans); }
+.input-wrap { position: relative; display: flex; align-items: center; min-width: 0; }
+.input-wrap > .icon { position: absolute; z-index: 1; left: 13px; pointer-events: none; color: var(--primary); width: 17px; height: 17px; }
+.field input, .field select, .date-fields input {
+  display: block; min-width: 0; width: 100%; height: 44px; padding: 10px 13px;
+  border: 1px solid var(--strong-line); border-radius: 5px; background: var(--paper);
+  font: 520 14px/1.3 var(--sans); color: var(--ink);
+}
+.field select { appearance: none; padding-right: 34px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23566160' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E"); background-position: right 11px center; background-size: 14px; background-repeat: no-repeat; }
+.input-wrap:has(select) > .icon { display: none; }
+.search-field .input-wrap input { padding-left: 39px; font-weight: 400; }
+.field input::placeholder { color: var(--muted); opacity: 1; }
+.field:focus-within .field-label { color: var(--accent); }
+.field input:hover, .field select:hover { border-color: var(--primary); }
+.date-fields { display: grid; grid-template-columns: repeat(2,minmax(0,155px)); gap: 10px; align-items: end; margin-top: 12px; }
+.date-fields label { min-width: 0; }
+
+.active-filters, .tag-list { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.active-filters { margin-top: 13px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.tag, .active-filters a {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%;
+  min-height: 27px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 99px;
+  font: 530 11px/1.35 var(--sans); color: var(--primary); background: var(--soft);
+}
+.tag:hover, .active-filters a:hover { border-color: var(--strong-line); background: var(--tint); }
+.active-filters a { background: var(--tint); border-color: var(--strong-line); }
+.active-filters svg { width: 12px; height: 12px; }
+.result-count { color: var(--muted); font: 510 12px/1.5 var(--sans); }
+
+.news-section { margin-top: 28px; }
+.section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 15px; }
+.section-heading h2 { color: var(--primary); font: 500 clamp(25px,2.05vw,32px)/1.15 var(--display); letter-spacing: -.036em; }
+.news-section:nth-of-type(3n + 2) .section-heading h2 { color: color-mix(in srgb, var(--primary) 30%, var(--accent)); }
+.news-section:nth-of-type(3n) .section-heading h2 { color: color-mix(in srgb, var(--primary) 62%, var(--accent)); }
+.more-link, .back-link, .source-link, .topic-meta { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font: 630 12px/1.45 var(--sans); }
+.more-link:hover, .back-link:hover, .source-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.more-link .icon, .back-link .icon, .source-link .icon { width: 14px; height: 14px; }
+.card-grid, .topic-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.news-card, .topic-card {
+  min-width: 0; background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius); color: var(--ink);
+}
+.news-card { display: flex; flex-direction: column; padding: 20px; }
+.card-meta { display: flex; align-items: flex-start; gap: 8px; justify-content: space-between; margin-bottom: 15px; }
+.source-identity { display: inline-flex; align-items: center; gap: 9px; min-width: 0; color: var(--muted); font-size: 12px; line-height: 1.3; }
+.source-mark { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--tint); color: var(--primary); font: 620 11px/1 var(--sans); letter-spacing: -.025em; }
+.source-name { min-width: 0; max-width: 23ch; font-weight: 560; }
+.date-block { flex: none; display: inline-flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2px; color: var(--muted); white-space: nowrap; }
+.date-block strong { color: var(--primary); font: 500 21px/.97 var(--display); letter-spacing: -.04em; }
+.date-block span { font: 510 10px/1.2 var(--sans); }
+.date-block > span { display: inline-flex; align-items: baseline; gap: 3px; }
+.news-card :is(h2,h3) { color: var(--primary); font: 550 clamp(20px, 1.65vw, 25px)/1.17 var(--display); letter-spacing: -.026em; text-wrap: pretty; }
+.news-card :is(h2,h3) a:hover { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.card-summary { margin-top: 10px; color: var(--muted); font: 400 14px/1.52 var(--sans); text-wrap: pretty; }
+.card-foot { display: flex; align-items: flex-end; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 20px; }
+.card-foot .tag-list { gap: 5px; }
+.tag { border-color: transparent; padding: 3px 8px; min-height: 23px; font-size: 10.5px; }
+.source-link { flex: none; }
+.archive-tools, .pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.archive-tools { margin: 23px 0 14px; justify-content: space-between; }
+.view-switch { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; padding: 3px; gap: 2px; background: var(--soft); }
+.view-switch a { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 5px 10px; border-radius: 4px; color: var(--muted); font: 550 12px/1.3 var(--sans); }
+.view-switch [aria-pressed="true"], .view-switch [aria-current="true"] { background: var(--paper); color: var(--primary); box-shadow: 0 0 0 1px var(--line); }
+.view-switch .icon { width: 15px; height: 15px; }
+.archive-list { border-top: 1px solid var(--line); }
+.archive-list .news-card { display: grid; grid-template-columns: minmax(140px, .52fr) minmax(230px,1.5fr) minmax(140px,.6fr); column-gap: 24px; padding: 20px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
+.archive-list .card-meta { grid-column: 1; grid-row: 1 / span 2; flex-direction: column-reverse; justify-content: center; align-items: flex-start; gap: 9px; margin: 0; }
+.archive-list .date-block { align-items: baseline; flex-direction: row; gap: 4px; }
+.archive-list .date-block span { font-size: 12px; }
+.archive-list .date-block strong { font-size: 20px; }
+.archive-list .source-mark { display: none; }
+.archive-list .card-foot { grid-column: 3; grid-row: 1 / span 2; margin: 0; padding: 0; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; }
+.archive-list .news-card :is(h2,h3), .archive-list .card-summary { grid-column: 2; }
+.archive-list .card-summary { margin-top: 6px; }
+.pagination { justify-content: center; margin-top: 24px; color: var(--muted); font-size: 13px; }
+.button, .pagination a {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: fit-content;
+  min-height: 43px; padding: 10px 15px; border: 1px solid var(--primary); border-radius: 5px;
+  color: var(--paper); background: var(--primary); font: 620 13px/1.4 var(--sans);
+}
+.button:hover, .pagination a:hover { filter: brightness(1.13); }
+.pagination a { background: var(--paper); color: var(--primary); }
+
+.topic-card { display: flex; flex-direction: column; align-items: flex-start; padding: 22px; }
+.topic-card:hover { border-color: var(--strong-line); background: var(--soft); }
+.topic-icon { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 21px; color: var(--primary); background: var(--tint); }
+.topic-icon .icon, .topic-icon svg { width: 22px; height: 22px; }
+.topic-card h2 { color: var(--primary); font: 550 26px/1.12 var(--display); letter-spacing: -.03em; }
+.topic-card p { margin-top: 9px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.topic-meta { display: flex; width: 100%; justify-content: space-between; margin-top: auto; padding-top: 21px; font-size: 12px; }
+.topic-meta svg { width: 15px; height: 15px; }
+.back-link { min-height: 36px; margin-bottom: 11px; }
+.detail-article, .about-panel { width: min(100%, 760px); margin-inline: auto; }
+.detail-article h1, .about-panel h1 { font-size: clamp(33px,3.65vw,52px); line-height: 1.1; text-wrap: pretty; }
+.detail-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 13px; color: var(--muted); font-size: 13px; }
+.detail-article .tag-list { margin-block: 18px; }
+.detail-body, .about-panel { color: var(--ink); font-size: 16px; line-height: 1.7; }
+.detail-body p + p, .about-panel p + p { margin-top: 13px; }
+.detail-body a, .about-panel p a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.detail-article .button, .about-panel .button { margin-block: 22px; }
+.empty-state { padding: 30px 0; max-width: 65ch; }
+.empty-state h2, .about-panel h2 { font: 530 28px/1.2 var(--display); color: var(--primary); letter-spacing: -.03em; }
+.empty-state p { margin-block: 8px 16px; line-height: 1.55; color: var(--muted); }
+.site-footer { background: var(--primary); color: white; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 27px; }
+.footer-inner .brand, .footer-inner strong { color: white; }
+.footer-inner .brand-mark { filter: brightness(0) invert(1); width: 29px; height: 29px; }
+.footer-inner .brand-name, .footer-inner > strong { font: 600 24px/1.1 var(--display); letter-spacing: -.05em; }
+.footer-inner p { margin-top: 6px; font-size: 12px; line-height: 1.5; color: color-mix(in srgb, white 87%,var(--primary)); }
+.footer-inner nav { display: flex; flex-wrap: wrap; gap: 5px 21px; }
+.footer-inner nav a { display: inline-flex; align-items: center; min-height: 35px; color: white; font-size: 12px; line-height: 1.45; }
+.footer-inner a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Atlas: a technical edition with a dark sky masthead and a humanist sans. */
+:root[data-style="atlas"] {
+  --display: "Barlow", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --radius: 4px;
+}
+[data-style="atlas"] .brand-name { font-weight: 750; letter-spacing: -.06em; }
+[data-style="atlas"] .hero { background: var(--primary); border-bottom-color: var(--primary); }
+[data-style="atlas"] .hero :is(.eyebrow,h1) { color: white; }
+[data-style="atlas"] .hero h1 em { color: color-mix(in srgb, var(--accent) 52%, white); font-style: normal; }
+[data-style="atlas"] .hero h1 { font-weight: 650; }
+[data-style="atlas"] .hero .eyebrow { font-family: var(--mono); color: color-mix(in srgb, var(--tint) 86%, var(--primary)); }
+[data-style="atlas"] .hero .intro { color: var(--tint); }
+[data-style="atlas"] .hero-art::before { background: white; opacity: .47; }
+[data-style="atlas"] .hero-art::after { background: color-mix(in srgb,var(--accent) 55%, white); opacity: .9; }
+[data-style="atlas"] .news-card :is(h2,h3) { font-size: clamp(18px,1.5vw,23px); font-weight: 640; }
+[data-style="atlas"] .source-mark, [data-style="atlas"] .topic-icon { border-radius: 4px; }
+[data-style="atlas"] .section-heading h2, [data-style="atlas"] .topic-card h2 { font-weight: 630; }
+[data-style="atlas"] .date-block strong { font: 520 18px/1 var(--mono); letter-spacing: -.07em; }
+
+@media (min-width: 1540px) { .hero-art { right: -1%; } }
+@media (max-width: 1050px) {
+  .wrap { width: calc(100% - 56px); }
+  .header-inner { gap: 22px; }
+  .card-grid, .topic-grid { gap: 12px; }
+  .news-card, .topic-card { padding: 16px; }
+  .archive-list .news-card { grid-template-columns: minmax(130px,.5fr) minmax(220px,1.4fr) minmax(120px,.58fr); gap: 0 15px; }
+}
+@media (max-width: 850px) {
+  .card-grid, .topic-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .hero-copy { width: 74%; }
+  .hero-art { width: 35%; }
+  .filterbar { grid-template-columns: minmax(180px,1.4fr) repeat(3,minmax(0,1fr)); }
+  .archive-list .news-card { grid-template-columns: minmax(110px,.4fr) minmax(0,1.6fr); }
+  .archive-list .card-foot { grid-column: 2; grid-row: 3; flex-direction: row; align-items: center; justify-content: flex-start; padding-top: 11px; }
+}
+@media (max-width: 650px) {
+  .wrap { width: calc(100% - 32px); }
+  .header-inner { min-height: auto; flex-wrap: wrap; gap: 0 12px; padding-top: 10px; }
+  .header-inner .brand { margin-right: auto; min-height: 36px; gap: 7px; }
+  .brand-mark { width: 29px; height: 29px; }
+  .brand-wordmark, .brand-mark.brand-wordmark { width: auto; height: 30px; max-width: min(230px,58vw); }
+  .brand-name { font-size: 25px; }
+  .header-inner .about-link { margin-left: auto; min-height: 36px; font-size: 12px; }
+  .about-link::before { display: none; }
+  .main-nav { order: 3; width: 100%; margin: 2px 0 0; gap: 24px; }
+  .main-nav a { min-height: 39px; padding-top: 0; font-size: 13px; }
+  .main-nav [aria-current="page"]::after { height: 2px; }
+  .hero-inner { min-height: 128px; padding-block: 18px; }
+  .hero-copy { width: 87%; }
+  .hero-art { width: 29%; right: -8%; opacity: .53; mask-image: linear-gradient(to right,transparent,black 65%); }
+  h1, .hero h1 { font-size: clamp(27px,6.6vw,37px); line-height: 1.08; }
+  .hero .eyebrow { margin-bottom: 7px; font-size: 9px; }
+  .intro { font-size: 13px; line-height: 1.45; margin-top: 6px; }
+  .main-content { padding-block: 16px 34px; }
+  .filterbar { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
+  .field { gap: 3px; }
+  .field-label { font-size: 10px; }
+  .search-field { grid-column: 1/-1; }
+  .search-field > .field-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .search-field input { font-size: 16px; }
+  .select-field { position: relative; }
+  .select-field .field-label { position: absolute; z-index: 1; left: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--ink); font-size: 12px; }
+  .select-field select { color: transparent; }
+  .select-field:has(option:checked:not([value=""])) select { background-color: var(--tint); border-color: var(--strong-line); }
+  .select-field option { color: var(--ink); }
+  .field select { padding: 9px 22px 9px 8px; background-position: right 5px center; background-size: 12px; font-size: 12px; }
+  .active-filters { margin-top: 9px; gap: 5px; }
+  .active-filters a { min-height: 30px; }
+  .news-section { margin-top: 20px; }
+  .section-heading { margin-bottom: 11px; }
+  .section-heading h2 { font-size: 25px; }
+  .news-card { padding: 17px; }
+  .news-card :is(h2,h3) { font-size: 22px; }
+  .card-meta { margin-bottom: 13px; }
+  .card-foot { padding-top: 16px; }
+  .topic-card { padding: 17px; }
+  .topic-card h2 { font-size: 22px; }
+  .topic-icon { width: 36px; height: 36px; margin-bottom: 13px; }
+  .topic-meta { padding-top: 15px; }
+  .archive-tools { margin: 15px 0 10px; }
+  .archive-list .news-card { display: flex; align-items: stretch; gap: 0; }
+  .archive-list .card-meta { flex-direction: row; align-items: center; justify-content: space-between; margin: 0 0 8px; }
+  .archive-list .date-block strong, [data-style="atlas"] .archive-list .date-block strong { font: 600 12px/1.3 var(--sans); }
+  .archive-list .date-block span { font-size: 11px; }
+  .archive-list .card-foot { flex-direction: row; justify-content: space-between; }
+  .footer-inner { align-items: flex-start; flex-direction: column; gap: 12px; padding-block: 22px; }
+}
+@media (max-width: 520px) {
+  .card-grid, .topic-grid { grid-template-columns: minmax(0,1fr); }
+  .topic-card { display: grid; grid-template-columns: 38px minmax(0,1fr); column-gap: 12px; }
+  .topic-icon { grid-column: 1; grid-row: 1/span 3; margin: 0; }
+  .topic-card h2, .topic-card p, .topic-card .topic-meta { grid-column: 2; }
+  .topic-card p { margin-top: 5px; }
+  .topic-meta { padding-top: 10px; }
+}
+@media (max-width: 355px) { .wrap { width: calc(100% - 24px); } .main-nav { gap: 16px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.date-fields { grid-column: 1/-1; margin-top: 2px; }
+.archive-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 19px; }
+.sort-link { display: inline-flex; align-items: center; min-height: 36px; font: 540 12px/1.4 var(--sans); color: var(--muted); }
+.sort-link:hover, .reset-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.active-filters .reset-link { border-color: transparent; background: transparent; }
+.topic-actions { margin-top: 22px; }
+.footer-name { font: 600 24px/1.2 var(--display); letter-spacing: -.045em; }
+.detail-wrap > .back-link { display: flex; width: min(100%,760px); margin: 0 auto 19px; }
+.detail-meta { justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 17px; margin-bottom: 20px; }
+.detail-meta time { font: 520 12px/1.5 var(--sans); }
+.detail-article .eyebrow { color: var(--accent); }
+.detail-lead { font: 460 clamp(18px,1.65vw,23px)/1.48 var(--display); margin-top: 20px; color: var(--primary); }
+.detail-body { margin: 24px 0 20px; }
+.detail-source { margin-top: 18px; border-top: 1px solid var(--line); }
+.about-panel { margin-block: 12px 32px; }
+.about-panel h2 { margin: 0 0 10px; }
+.about-panel p + h2 { margin-top: 26px; }
+#results > .result-count:not(.sr-only) { margin-top: 18px; }
+#inhalt:focus { outline: none; }
+@media (max-width: 650px) {
+  .archive-actions { gap: 5px 12px; }
+  .archive-tools { column-gap: 8px; }
+  .detail-wrap > .back-link { margin-bottom: 12px; }
+  .detail-meta { padding-bottom: 11px; margin-bottom: 15px; }
+}
+
+/* Local vector artwork keeps the example mastheads independent of image services. */
+[data-artwork="stadtplan"] .hero-art::before { mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20450%20205%22%20fill%3D%22none%22%3E%3Cdefs%3E%3Cpattern%20id%3D%22grid%22%20width%3D%22143%22%20height%3D%2284%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate%28-15%29%22%3E%3Cpath%20d%3D%22M1%201h59v31H1zM4%204h19v25H4zM27%204h29v13H27zM34%2021h22v8H34zM72%201h62v31H72zM76%204h29v10H76zM76%2018h29v11H76zM110%205h20v23h-20zM1%2043h57v31H1zM4%2046h20v11H4zM4%2060h20v10H4zM29%2046h25v25H29zM72%2043h62v31H72z%22%20stroke%3D%22black%22%20stroke-width%3D%221.25%22%20/%3E%3Cg%20fill%3D%22black%22%20opacity%3D%22.4%22%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2252%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%2286%22%20cy%3D%2265%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%2293%22%20cy%3D%2255%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2263%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%22112%22%20cy%3D%2251%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%22122%22%20cy%3D%2260%22%20r%3D%223.3%22/%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%2252%22%20r%3D%223.3%22/%3E%3C/g%3E%3C/pattern%3E%3Cmask%20id%3D%22cut%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22white%22/%3E%3Cpath%20d%3D%22M70-30c50%2031%20114%2015%20138%2050s2%2061%2068%2066%2051%2022%2059%2068%2048%2040%20106%2041%22%20stroke%3D%22black%22%20stroke-width%3D%2224%22%20/%3E%3Cpath%20d%3D%22M30%20220l97-45%2047-46%2059-13%20102-68%20125-31%22%20stroke%3D%22black%22%20stroke-width%3D%228%22%20/%3E%3C/mask%3E%3C/defs%3E%3Crect%20width%3D%22450%22%20height%3D%22205%22%20fill%3D%22url%28%23grid%29%22%20mask%3D%22url%28%23cut%29%22/%3E%3Cpath%20d%3D%22M70-30c50%2031%20114%2015%20138%2050s2%2061%2068%2066%2051%2022%2059%2068%2048%2040%20106%2041%22%20stroke%3D%22black%22%20stroke-width%3D%2223%22%20opacity%3D%22.22%22/%3E%3Cpath%20d%3D%22M70-30c50%2031%20114%2015%20138%2050s2%2061%2068%2066%2051%2022%2059%2068%2048%2040%20106%2041%22%20stroke%3D%22black%22%20stroke-width%3D%221%22%20opacity%3D%22.65%22/%3E%3Cpath%20d%3D%22M30%20220l97-45%2047-46%2059-13%20102-68%20125-31%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20/%3E%3Cpath%20d%3D%22M197%2074l34-15m-32%2019%2034-15m87%2087%2030-12m-29%2015%2030-12%22%20stroke%3D%22black%22%20stroke-width%3D%221%22%20/%3E%3C/svg%3E"); }
+[data-artwork="stadtplan"] .hero-art::after { mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20450%20205%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M92%20203l34-26%2048-48%2059-13%2056-37%2050-34%22%20stroke%3D%22black%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22/%3E%3Ccircle%20cx%3D%22126%22%20cy%3D%22177%22%20r%3D%223.4%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22174%22%20cy%3D%22129%22%20r%3D%223.4%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22233%22%20cy%3D%22116%22%20r%3D%223.4%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22289%22%20cy%3D%2279%22%20r%3D%223.4%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22339%22%20cy%3D%2245%22%20r%3D%223.4%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22233%22%20cy%3D%22116%22%20r%3D%228%22%20stroke%3D%22black%22%20stroke-width%3D%221.3%22/%3E%3C/svg%3E"); }
+[data-artwork="umlaufbahn"] .hero-art::before { mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20450%20205%22%20fill%3D%22none%22%3E%3Cdefs%3E%3Cpattern%20id%3D%22sky%22%20width%3D%2283%22%20height%3D%2260%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cg%20fill%3D%22black%22%3E%3Ccircle%20cx%3D%226%22%20cy%3D%229%22%20r%3D%220.75%22/%3E%3Ccircle%20cx%3D%2251%22%20cy%3D%2247%22%20r%3D%220.95%22/%3E%3Ccircle%20cx%3D%2261%22%20cy%3D%2221%22%20r%3D%220.65%22/%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2254%22%20r%3D%220.7%22/%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2237%22%20r%3D%220.65%22/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect%20width%3D%22450%22%20height%3D%22205%22%20fill%3D%22url%28%23sky%29%22/%3E%3Cg%20stroke%3D%22black%22%20stroke-width%3D%22.88%22%20transform%3D%22rotate%28-25%20235%20109%29%22%3E%3Cellipse%20cx%3D%22235%22%20cy%3D%22109%22%20rx%3D%2255%22%20ry%3D%2227%22/%3E%3Cellipse%20cx%3D%22235%22%20cy%3D%22109%22%20rx%3D%2293%22%20ry%3D%2246%22/%3E%3Cellipse%20cx%3D%22235%22%20cy%3D%22109%22%20rx%3D%22132%22%20ry%3D%2263%22/%3E%3Cellipse%20cx%3D%22235%22%20cy%3D%22109%22%20rx%3D%22174%22%20ry%3D%2281%22/%3E%3Cellipse%20cx%3D%22235%22%20cy%3D%22109%22%20rx%3D%22215%22%20ry%3D%22101%22/%3E%3C/g%3E%3Ccircle%20cx%3D%22235%22%20cy%3D%22109%22%20r%3D%2217%22%20fill%3D%22black%22%20opacity%3D%22.64%22/%3E%3Cpath%20d%3D%22M90%20235%20372-16m-220-2%20215%20236%22%20stroke%3D%22black%22%20stroke-width%3D%220.7%22%20stroke-dasharray%3D%223%205%22/%3E%3C/svg%3E"); }
+[data-artwork="umlaufbahn"] .hero-art::after { mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20450%20205%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M106%20180c36%202%20115-22%20199-92%2029-24%2057-54%2080-89%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20/%3E%3Ccircle%20cx%3D%22144%22%20cy%3D%22177%22%20r%3D%224%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22287%22%20cy%3D%22103%22%20r%3D%224%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22371%22%20cy%3D%2219%22%20r%3D%224%22%20fill%3D%22black%22/%3E%3Ccircle%20cx%3D%22287%22%20cy%3D%22103%22%20r%3D%229%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22/%3E%3C/svg%3E"); }
+</style>
+  <script type="application/json" id="embedded-edition">{"profile":{"name":"Stadtlabor","logo":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSI+CiAgPHRpdGxlPlN0YWR0bGFib3I8L3RpdGxlPgogIDxnIGZpbGw9IiMxODRjNDAiPgogICAgPHBhdGggZD0iTTIgNGgxOHYxMkgyek0yIDIwaDEwdjlIMnpNMTYgMjBoNHYxMkgydi0xaDE0ek0yNCA0aDIydjdIMzF2NWgtN3oiLz4KICAgIDxwYXRoIGQ9Ik0yIDM2aDE4djhIMnpNMjQgMjFoNWMuOCA2LjggNi4zIDEyLjIgMTMgMTN2MTBIMjR6Ii8+CiAgPC9nPgogIDxwYXRoIGZpbGw9IiNiNTRkMmMiIGQ9Ik0zMyAxNWgxM3YxNWMtNy4yLS4zLTEyLjgtNi42LTEzLTE1eiIvPgo8L3N2Zz4K","kicker":"Stadtentwicklung","headline":"Wie sich unsere","highlight":"St\u00e4dte ver\u00e4ndern","intro":"Neue Wege, gr\u00fcne Quartiere und \u00f6ffentliche Pl\u00e4tze im Wandel.","about":"Stadtlabor sammelt Beispiele aus der Stadtentwicklung. Wie wird aus einem Parkplatz ein Stadtplatz? Wo bleibt der Regen nach einem Gewitter? Die Meldungen f\u00fchren zu den Pl\u00e4nen, Berichten und Entscheidungen der verantwortlichen Stellen.","publisher":"Stadtlabor (Beispielredaktion)","theme":{"style":"journal","artwork":"stadtplan","primary":"#174b40","accent":"#a33e21","tint":"#f2f4ed","ink":"#172e28"},"sections":[{"id":"praxis","label":"Vor Ort"},{"id":"planung","label":"Planung"},{"id":"wissen","label":"Hintergrund"}],"topics":[{"id":"stadtraum","label":"\u00d6ffentlicher Raum","description":"Wie sich Pl\u00e4tze, Parks und Treffpunkte im Alltag nutzen lassen.","icon":"building"},{"id":"stadtgruen","label":"Stadtgr\u00fcn","description":"B\u00e4ume, Regenwasser und der Umgang mit Hitze in der Stadt.","icon":"leaf"},{"id":"mobilitaet","label":"Mobilit\u00e4t","description":"Neue Wege f\u00fcr Menschen zu Fu\u00df und auf dem Rad.","icon":"route"},{"id":"quartiere","label":"Wohnen und Quartier","description":"Wo Wohnungen entstehen und wie Nachbarschaften wachsen.","icon":"layers"}],"feed":"feeds/stadtlabor.json"},"items":[{"id":"hopfenmarkt","title":"Hamburg macht aus dem Hopfenmarkt wieder einen Stadtplatz","summary":"Wo heute Autos parken, sollen k\u00fcnftig Menschen sitzen, Boule spielen und im Schatten von B\u00e4umen eine Pause machen. Der Umbau hat begonnen.","body":"Vor dem Mahnmal St. Nikolai plant Hamburg 13 zus\u00e4tzliche B\u00e4ume und lange B\u00e4nke. Im Pflaster soll der Verlauf eines mittelalterlichen Walls sichtbar werden. Wer zu Fu\u00df zwischen Rathaus und Speicherstadt unterwegs ist, soll die Stra\u00dfen leichter queren k\u00f6nnen.","date":"2026-11-17","section":"praxis","topics":["stadtraum","mobilitaet"],"source":{"name":"Bezirksamt Hamburg-Mitte","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/aktuelles/pressemitteilungen/baustart-am-hopfenmarkt-1238284"}},{"id":"wandse-aue","title":"An der Wandse bekommt das Wasser mehr Platz","summary":"Hamburg vergr\u00f6\u00dfert die Aue n\u00f6rdlich des Ostender Teichs. Bei Starkregen soll sie Wasser aufnehmen, bevor die Wege \u00fcberfluten.","body":"Drei Stege sollen den Zugang zum Ufer erm\u00f6glichen. F\u00fcr Menschen zu Fu\u00df und auf dem Rad sind getrennte Wege vorgesehen. Den Abschluss der Arbeiten plant der Bezirk f\u00fcr das Fr\u00fchjahr 2027.","date":"2026-11-11","section":"praxis","topics":["stadtgruen","mobilitaet"],"source":{"name":"Bezirksamt Wandsbek","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/aktuelles/2026-11-11-aufwertung-an-der-wandse-aue-1236292"}},{"id":"stremelkamp","title":"Ein Platz zum Klettern, Boule spielen und Zusammensitzen","summary":"Am Stremelkamp in Hamburg hat der Bezirk einen Spielplatz erneuert. Neben dem Ballsportfeld gibt es jetzt auch Platz f\u00fcr j\u00fcngere Kinder.","body":"Neue B\u00e4nke und eine Boulefl\u00e4che erg\u00e4nzen die Spielger\u00e4te. Zur Einweihung am 18. November lud der Bezirk die Nachbarschaft ein.","date":"2026-11-09","section":"praxis","topics":["stadtraum"],"source":{"name":"Bezirksamt Harburg","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/aktuelles/pressemeldungen/neuer-spiel-und-aktivplatz-stremelkamp-1235992"}},{"id":"platz-der-luftbruecke","title":"Wie der Platz der Luftbr\u00fccke Regen f\u00fcr seine B\u00e4ume sammelt","summary":"Der Berliner Entwurf erh\u00e4lt den zweiten Platz beim Deutschen Verkehrsplanungspreis. Er verbindet den Umbau der Verkehrsfl\u00e4chen mit der Bew\u00e4sserung des Stadtgr\u00fcns.","body":"Regen von Fahrbahn und Gehwegen soll k\u00fcnftig zu den B\u00e4umen und in bepflanzte Mulden flie\u00dfen. Unterirdische Speicher nehmen zus\u00e4tzlich Wasser auf und lassen es nach und nach versickern.","date":"2026-11-08","section":"planung","topics":["mobilitaet","stadtgruen","stadtraum"],"source":{"name":"Land Berlin","url":"https://www.berlin.de/sen/uvk/presse/pressemitteilungen/2026/pressemitteilung.1736304.php"}},{"id":"alstervorland","title":"Mehr Raum f\u00fcr Radverkehr am Hamburger Alsterufer","summary":"Hamburg stellt Pl\u00e4ne f\u00fcr das Ufer zwischen Kennedybr\u00fccke und Lohm\u00fchlenstra\u00dfe vor. Ein breiter Radweg soll Engstellen am Wasser entsch\u00e4rfen.","body":"An stark genutzten Abschnitten soll der Radweg n\u00e4her an die Fahrbahn r\u00fccken. \u00d6stlich der Br\u00fccke sind barrierefreie Zug\u00e4nge vorgesehen. Die Stadt plant den Baubeginn f\u00fcr April 2028.","date":"2026-11-05","section":"planung","topics":["mobilitaet","stadtraum"],"source":{"name":"Stadt Hamburg","url":"https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/aktuelles/pressemeldungen/alstervorland-zwischen-kennedybruecke-und-lohmuehlenstrasse-wird-aufgewertet-1234946"}},{"id":"mini-wald","title":"Ein kleiner Wald f\u00fcr Schnelsen","summary":"In Hamburg-Schnelsen ist ein Waldst\u00fcck mit rund 2.800 B\u00e4umen geplant. Bei der Pflanzung k\u00f6nnen die Menschen aus dem Stadtteil mitmachen.","body":"Der Bezirk hat eine ehemalige Ackerfl\u00e4che am Vielohweg ausgew\u00e4hlt. Mehr als 30 Baumarten sollen dort dicht beieinander wachsen. Zum gemeinsamen Pflanzen l\u00e4dt der Bezirk am 28. November ein.","date":"2026-10-29","section":"praxis","topics":["stadtgruen"],"source":{"name":"Bezirksamt Eimsb\u00fcttel","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/bezirksamt-eimsbuettel/aktuelles/pressemeldungen/mini-wald-entsteht-in-schnelsen-jede-r-kann-mitpflanzen--1232524"}},{"id":"hammer-park","title":"Im Hammer Park entsteht ein Haus f\u00fcr mehrere Generationen","summary":"Hamburg baut im Park einen gemeinsamen Treffpunkt f\u00fcr Jugendliche, Familien mit kleinen Kindern und \u00e4ltere Menschen.","body":"Das Otto-Linne-Haus soll rund 1.100 Quadratmeter umfassen. Bei einer Beteiligung im Vorjahr wurde der Name des Landschaftsarchitekten gew\u00e4hlt, der den Park gepr\u00e4gt hat.","date":"2026-10-29","section":"praxis","topics":["quartiere","stadtraum"],"source":{"name":"Bezirksamt Hamburg-Mitte","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/aktuelles/pressemitteilungen/baubeginn-otto-linne-haus-hammer-park-1232496"}},{"id":"molkenmarkt-durchgang","title":"Ein neuer Durchgang f\u00fcr das Quartier am Molkenmarkt","summary":"Eine \u00c4nderung des Bebauungsplans soll in einem Baublock neue Wohnungen und eine \u00f6ffentlich nutzbare Verbindung erm\u00f6glichen.","body":"Die Plan\u00e4nderung betrifft auch die Gr\u00fcnfl\u00e4che neben dem bestehenden Haus Klosterstra\u00dfe 44. Zu welchem Zeitpunkt die \u00d6ffentlichkeit sich beteiligen kann, will die Verwaltung gesondert mitteilen.","date":"2026-09-14","section":"planung","topics":["quartiere","stadtraum"],"source":{"name":"Projekt Molkenmarkt Berlin","url":"https://molkenmarkt.berlin.de/2026/09/14/aufstellung-des-bebauungsplans-1-14-2-grundlage-fuer-die-schaffung-von-wohnraum-am-molkenmarkt-gelegt/"}},{"id":"schumacher-quartier","title":"In Tegel beginnt der Bau der ersten 327 Wohnungen","summary":"Auf dem fr\u00fcheren Flughafengel\u00e4nde startet der Wohnungsbau im Schumacher Quartier. Die H\u00e4lfte der ersten Wohnungen wird \u00f6ffentlich gef\u00f6rdert.","body":"Auf zwei Baufeldern entstehen au\u00dferdem Gewerber\u00e4ume und eine Kita. Vorgesehen sind Geb\u00e4ude in Holzhybridbauweise und eine Gestaltung, die Regenwasser im Quartier h\u00e4lt.","date":"2026-09-03","section":"praxis","topics":["quartiere","stadtgruen"],"source":{"name":"Bezirksamt Reinickendorf","url":"https://www.berlin.de/ba-reinickendorf/aktuelles/pressemitteilungen/2026/pressemitteilung.1710146.php"}},{"id":"tegelsbarg","title":"Tegelsbarg er\u00f6ffnet seinen neu gestalteten Quartierspark","summary":"Die Hamburger Parkanlage verbindet Laufstrecke, Spielpl\u00e4tze und ruhige Gr\u00fcnfl\u00e4chen. Kinder und Erwachsene aus dem Quartier haben Ideen beigetragen.","body":"Zum Gel\u00e4nde geh\u00f6ren ein Pumptrack, Tischtennisplatten und eine Skateanlage. Wege im zentralen Parkbereich erhielten einen Belag, der sich im Sommer weniger aufheizen soll.","date":"2026-06-20","section":"praxis","topics":["stadtgruen","quartiere"],"source":{"name":"Bezirksamt Wandsbek","url":"https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/aktuelles/einweihung-der-neugestalteten-parkanlage-tegelsbarg-1189460"}},{"id":"berlin-regenwasser","title":"Berlin will Regenwasser dort nutzen, wo es f\u00e4llt","summary":"Der Senat setzt beim Umbau zur Schwammstadt auf entsiegelte B\u00f6den, begr\u00fcnte D\u00e4cher und Regenwasser f\u00fcr die Bew\u00e4sserung.","body":"F\u00fcr \u00f6ffentliche und private Grundst\u00fccke liegen Karten vor, die zeigen, wo versiegelte Fl\u00e4chen vom Kanalnetz abgekoppelt werden k\u00f6nnten. Bei landeseigenen Fl\u00e4chen will die Stadt schrittweise vorgehen.","date":"2026-06-09","section":"planung","topics":["stadtgruen"],"source":{"name":"Berliner Senat","url":"https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1679421.php"}},{"id":"berlin-molkenmarkt","title":"Wohnungen und ein Kulturhaus f\u00fcr Berlins historische Mitte","summary":"Der Senat hat einen Planentwurf f\u00fcr den Molkenmarkt beschlossen. Er sieht zus\u00e4tzliche gebundene Wohnungen und neue R\u00e4ume f\u00fcr Gewerbe und Kultur vor.","body":"An der Stralauer Stra\u00dfe sollen B\u00fchnen und Ausstellungsr\u00e4ume entstehen. Der n\u00e4chste Schritt ist die Befassung des Abgeordnetenhauses mit dem Entwurf.","date":"2026-05-19","section":"planung","topics":["quartiere","stadtraum"],"source":{"name":"Berliner Senat","url":"https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1672182.php"}},{"id":"schwammstadt","title":"Was St\u00e4dte gegen Hitze und Starkregen tun k\u00f6nnen","summary":"Das Umweltbundesamt zeigt, wie Kommunen Wasser im Stadtgebiet zur\u00fcckhalten und f\u00fcr trockene Tage verf\u00fcgbar machen k\u00f6nnen.","body":"Das Amt empfiehlt unter anderem bessere Daten zu Gr\u00fcnfl\u00e4chen und Gew\u00e4ssern. Solche Informationen helfen Kommunen, geeignete Fl\u00e4chen f\u00fcr den Umbau zu finden und ihre Fortschritte zu verfolgen.","date":"2024-07-03","section":"wissen","topics":["stadtgruen"],"source":{"name":"Umweltbundesamt","url":"https://www.umweltbundesamt.de/presse/pressemitteilungen/staedte-widerstandsfaehig-gegen"}}]}</script>
+  <script type="module">
+// Text, links and layout shared by the feed, archive and topic pages.
+export const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+})[character]);
+
+export function webUrl(value) {
+  if (!value) return '';
+  try {
+    const url = new URL(value, document.baseURI);
+    return ['https:', 'http:'].includes(url.protocol) ? url.href : '';
+  } catch {
+    return '';
+  }
+}
+
+export function logoUrl(value) {
+  if (/^data:image\/(?:svg\+xml|png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(value)) return value;
+  return webUrl(value);
+}
+
+export function routeQuery() {
+  // A local file can change its fragment without changing its file URL.
+  if (location.protocol === 'file:' && location.hash.startsWith('#?')) {
+    return new URLSearchParams(location.hash.slice(2));
+  }
+  return new URLSearchParams(location.search);
+}
+
+const symbols = {
+  search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
+  arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>',
+  back: '<path d="M20 12H5m6-6-6 6 6 6"/>',
+  external: '<path d="M6 18 18 6M7 6h11v11"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/>',
+  tag: '<path d="M3 4h8l10 10-7 7L3 10z"/><circle cx="7" cy="7.5" r=".8"/>',
+  layers: '<path d="m3 8 9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+  list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.1M4 12h.1M4 18h.1"/>',
+  grid: '<rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/>',
+  leaf: '<path d="M20 3C11 3 3 6 4 14c.4 3.4 3 5.5 6 5 7-.5 10-8 10-16ZM3 21l12-12"/>',
+  route: '<circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 6h7a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h7"/>',
+  building: '<path d="M4 21V7l8-4v18m0-12h7v12M2 21h20M7 9h2m-2 4h2m-2 4h2m6-5h1m-1 4h1"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>',
+  orbit: '<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="11" ry="4.5" transform="rotate(-36 12 12)"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
+  telescope: '<path d="m3 10 13-6 3 6-13 5zM12 13v3m0 0-4 5m4-5 4 5m2-16 2-1 2 4-2 1"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  close: '<path d="m6 6 12 12M6 18 18 6"/>'
+};
+export function icon(name) {
+  return `<svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${symbols[name] || symbols.tag}</svg>`;
+}
+
+export function route(parameters = {}) {
+  const query = new URLSearchParams();
+  const profile = routeQuery().get('profil');
+  if (profile) query.set('profil', profile);
+  for (const [key, value] of Object.entries(parameters)) {
+    if (value !== '' && value != null) query.set(key, value);
+  }
+  if (location.protocol === 'file:') return '#?' + query;
+  return location.pathname + (query.size ? '?' + query : '');
+}
+
+export function internal(label, parameters, className = '', attributes = '') {
+  return `<a data-route class="${escapeHtml(className)}" href="${escapeHtml(route(parameters))}" ${attributes}>${label}</a>`;
+}
+
+function outbound(label, value, className = '') {
+  const url = webUrl(value);
+  return url ? `<a class="${className}" href="${escapeHtml(url)}">${label}</a>` : '';
+}
+
+export function brand(profile) {
+  const logo = logoUrl(profile.logo);
+  const isWordmark = Boolean(logo && profile.logoMode === 'wordmark');
+  const image = logo ? `<img class="${isWordmark ? 'brand-wordmark' : 'brand-mark'}" src="${escapeHtml(logo)}" alt="" height="44">` : '';
+  return image + (isWordmark ? '' : `<span class="brand-name">${escapeHtml(profile.name)}</span>`);
+}
+
+export function header(profile, view) {
+  const navigation = [['aktuell', 'Aktuell'], ['archiv', 'Alle Meldungen'], ['themen', 'Themen']];
+  return `<header class="site-header"><div class="wrap header-inner">
+    ${internal(brand(profile), {}, 'brand', 'aria-label="' + escapeHtml(profile.name) + ', Startseite"')}
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      ${navigation.map(([id, label]) => internal(label, {ansicht: id === 'aktuell' ? '' : id}, 'nav-link', id === view ? 'aria-current="page"' : '')).join('')}
+    </nav>
+    ${internal(icon('info') + '<span>Über</span>', {ansicht: 'ueber'}, 'about-link', view === 'ueber' ? 'aria-current="page"' : '')}
+  </div></header>`;
+}
+
+export function footer(profile) {
+  const links = profile.links || {};
+  return `<footer class="site-footer"><div class="wrap footer-inner">
+    <span class="footer-name">${escapeHtml(profile.name)}</span>
+    <nav class="footer-links" aria-label="Weitere Informationen">
+    ${internal('Über die Website', {ansicht: 'ueber'})}
+    ${outbound('Website', links.website)}${outbound('Newsletter', links.newsletter)}
+    ${outbound('Impressum', links.impressum)}${outbound('Datenschutz', links.datenschutz)}
+    </nav></div></footer>`;
+}
+
+export function hero({view, kicker, title, highlight, intro}) {
+  return `<header class="hero" data-view="${escapeHtml(view)}"><div class="wrap hero-inner">
+    <div class="hero-copy">${kicker ? `<p class="eyebrow">${escapeHtml(kicker)}</p>` : ''}
+    <h1>${escapeHtml(title)}${highlight ? ` <em>${escapeHtml(highlight)}</em>` : ''}</h1>
+    ${intro ? `<p class="intro">${escapeHtml(intro)}</p>` : ''}</div>
+    <div class="hero-art" aria-hidden="true"></div>
+  </div></header>`;
+}
+
+const germanDate = new Intl.DateTimeFormat('de-DE', {dateStyle: 'long', timeZone: 'UTC'});
+const germanMonth = new Intl.DateTimeFormat('de-DE', {month: 'short', timeZone: 'UTC'});
+export function fullDate(value) {
+  return germanDate.format(new Date(value + 'T12:00:00Z'));
+}
+function dateBlock(value) {
+  const date = new Date(value + 'T12:00:00Z');
+  return `<time class="date-block" datetime="${escapeHtml(value)}" aria-label="${escapeHtml(germanDate.format(date))}"><strong>${date.getUTCDate()}</strong><span class="date-rest"><span class="date-month">${escapeHtml(germanMonth.format(date))}</span><span class="date-year">${date.getUTCFullYear()}</span></span></time>`;
+}
+export function sourceIdentity(source = {}) {
+  const name = source.name || 'Quelle';
+  const words = name.replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/);
+  const initials = words.length > 1 ? words.slice(0, 2).map(word => word[0]).join('') : name.slice(0, 2);
+  const sourceMark = source.mark || initials.toLocaleUpperCase('de');
+  return `<span class="source-identity"><span class="source-mark" aria-hidden="true">${escapeHtml(sourceMark)}</span><span class="source-name">${escapeHtml(name)}</span></span>`;
+}
+export function sourceLink(source, label = 'Zur Quelle', className = 'source-link') {
+  return outbound(escapeHtml(label) + ' ' + icon('external'), source?.url, className);
+}
+export function tags(item, topics) {
+  const items = (item.topics || []).map(id => topics.get(id)).filter(Boolean);
+  return `<div class="tag-list">${items.map(topic =>
+    internal(escapeHtml(topic.label), {ansicht: 'themen', thema: topic.id}, 'tag')).join('')}</div>`;
+}
+
+export function newsCard(item, state, topics) {
+  const heading = state.ansicht === 'archiv' ? 'h2' : 'h3';
+  const parameters = {...state, ansicht: 'meldung', id: item.id, rueckweg: state.ansicht || 'aktuell'};
+  return `<article class="news-card" data-section="${escapeHtml(item.section)}">
+    <div class="card-meta">${sourceIdentity(item.source)}${dateBlock(item.date)}</div>
+    <${heading}>${internal(escapeHtml(item.title), parameters)}</${heading}>
+    <p class="card-summary">${escapeHtml(item.summary)}</p>
+    <div class="card-foot">${tags({...item, topics: item.topics.slice(0, 1)}, topics)}${sourceLink(item.source)}</div>
+  </article>`;
+}
+
+export function topicCards(profile, items) {
+  const cards = profile.topics.map(topic => {
+    const count = items.filter(item => item.topics.includes(topic.id)).length;
+    return internal(`<span class="topic-icon">${icon(topic.icon || 'layers')}</span>
+      <h2>${escapeHtml(topic.label)}</h2><p>${escapeHtml(topic.description)}</p>
+      <span class="topic-meta">${count} ${count === 1 ? 'Meldung' : 'Meldungen'} ${icon('arrow')}</span>`,
+      {ansicht: 'themen', thema: topic.id}, 'topic-card');
+  });
+  return `<div class="topic-grid">${cards.join('')}</div>`;
+}
+
+const esc = escapeHtml;
+const main = document.querySelector('#inhalt');
+const pageSize = 8;
+const views = ['aktuell', 'archiv', 'themen', 'meldung', 'ueber'];
+const periods = [['30', 'Letzte 30 Tage'], ['90', 'Letzte 90 Tage'], ['jahr', 'Dieses Jahr'], ['frei', 'Eigener Zeitraum']];
+let profile, items, sections, topics;
+let editingSearch = false;
+
+async function readJson(path) {
+  const response = await fetch(new URL(path, document.baseURI));
+  if (!response.ok) throw new Error('Datei nicht verfügbar');
+  return response.json();
+}
+
+function localDateString(date) {
+  return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0')].join('-');
+}
+function isDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return false;
+  const date = new Date(value + 'T12:00:00Z');
+  return Number.isFinite(date.valueOf()) && date.toISOString().startsWith(value);
+}
+function normalize(value) {
+  return String(value).toLocaleLowerCase('de').normalize('NFKD').replace(/\p{M}/gu, '').trim();
+}
+
+function getState() {
+  const query = routeQuery();
+  const view = query.get('ansicht');
+  const period = query.get('zeitraum');
+  const page = Number(query.get('seite'));
+  return {
+    ansicht: views.includes(view) ? view : 'aktuell',
+    bereich: sections.has(query.get('bereich')) ? query.get('bereich') : '',
+    thema: topics.has(query.get('thema')) ? query.get('thema') : '',
+    zeitraum: periods.some(([value]) => value === period) ? period : '',
+    von: period === 'frei' && isDate(query.get('von')) ? query.get('von') : '',
+    bis: period === 'frei' && isDate(query.get('bis')) ? query.get('bis') : '',
+    suche: query.get('suche') || '',
+    seite: Number.isSafeInteger(page) && page > 1 ? page : '',
+    layout: query.get('layout') === 'karten' ? 'karten' : '',
+    sortierung: query.get('sortierung') === 'aufsteigend' ? 'aufsteigend' : '',
+    id: query.get('id') || '',
+    rueckweg: ['aktuell', 'archiv', 'themen'].includes(query.get('rueckweg')) ? query.get('rueckweg') : ''
+  };
+}
+
+function selectField(label, name, options, value, placeholder) {
+  const choices = [['', placeholder], ...options];
+  return `<label class="field select-field"><span class="field-label">${esc(label)}</span><span class="input-wrap">
+    <select name="${name}">${choices.map(([id, text]) => `<option value="${esc(id)}" ${id === value ? 'selected' : ''}>${esc(text)}</option>`).join('')}</select>
+    ${icon('chevron')}</span></label>`;
+}
+function filterForm(state) {
+  return `<form class="filterbar" role="search" aria-label="Meldungen suchen und filtern">
+    <label class="field search-field"><span class="field-label">Suche</span><span class="input-wrap">${icon('search')}
+    <input type="search" name="suche" placeholder="${countLabel(items.length)} durchsuchen" value="${esc(state.suche)}" autocomplete="off"></span></label>
+    ${selectField('Bereich', 'bereich', profile.sections.map(section => [section.id, section.label]), state.bereich, 'Alle Bereiche')}
+    ${selectField('Thema', 'thema', profile.topics.map(topic => [topic.id, topic.label]), state.thema, 'Alle Themen')}
+    ${selectField('Zeitraum', 'zeitraum', periods, state.zeitraum, 'Gesamter Zeitraum')}
+    <div class="date-fields" ${state.zeitraum === 'frei' ? '' : 'hidden'}>
+      <label class="field"><span class="field-label">Von</span><span class="input-wrap"><input type="date" name="von" value="${esc(state.von)}"></span></label>
+      <label class="field"><span class="field-label">Bis</span><span class="input-wrap"><input type="date" name="bis" value="${esc(state.bis)}"></span></label>
+    </div></form>
+    <div id="filter-feedback"></div>`;
+}
+const emptyFilters = {bereich: '', thema: '', zeitraum: '', von: '', bis: '', suche: '', seite: ''};
+
+function filterFeedback(state) {
+  const entries = [
+    ['suche', state.suche.trim() && 'Suche „' + state.suche.trim() + '“'],
+    ['bereich', sections.get(state.bereich)?.label],
+    ['thema', topics.get(state.thema)?.label],
+    ['zeitraum', state.zeitraum === 'frei' && (state.von || state.bis)
+      ? [state.von && 'Ab ' + fullDate(state.von), state.bis && 'bis ' + fullDate(state.bis)].filter(Boolean).join(' ')
+      : periods.find(([value]) => value === state.zeitraum)?.[1]]
+  ].filter(([, label]) => label);
+  if (!entries.length) return '';
+  return `<div class="active-filters" aria-label="Aktive Filter">${entries.map(([key, label]) => {
+    const target = {...state, [key]: '', seite: ''};
+    if (key === 'zeitraum') Object.assign(target, {von: '', bis: ''});
+    return internal(esc(label) + ' ' + icon('close'), target, 'filter-chip', 'aria-label="' + esc(label) + ' entfernen"');
+  }).join('')} ${internal('Alle löschen', {...state, ...emptyFilters}, 'reset-link')}</div>`;
+}
+
+function matches(state) {
+  const today = new Date();
+  const todayValue = localDateString(today);
+  let earliest = state.von, latest = state.bis;
+  if (state.zeitraum === 'jahr') {
+    earliest = today.getFullYear() + '-01-01';
+    latest = todayValue;
+  }
+  if (['30', '90'].includes(state.zeitraum)) {
+    today.setDate(today.getDate() - Number(state.zeitraum) + 1);
+    earliest = localDateString(today);
+    latest = todayValue;
+  }
+  const terms = normalize(state.suche).split(/\s+/).filter(Boolean);
+  return items.filter(item => {
+    if (state.bereich && item.section !== state.bereich) return false;
+    if (state.thema && !item.topics.includes(state.thema)) return false;
+    if ((earliest && item.date < earliest) || (latest && item.date > latest)) return false;
+    if (!terms.length) return true;
+    const searchable = normalize([item.title, item.summary, item.body, item.source?.name,
+      sections.get(item.section)?.label, ...item.topics.map(id => topics.get(id)?.label)].join(' '));
+    return terms.every(term => searchable.includes(term));
+  });
+}
+function countLabel(count) {
+  return count + (count === 1 ? ' Meldung' : ' Meldungen');
+}
+function cards(list, state, layout = 'card-grid') {
+  return `<div class="${layout}">${list.map(item => newsCard(item, state, topics)).join('')}</div>`;
+}
+function emptyState(state) {
+  if (!items.length) return '<div class="empty-state"><h2>Noch keine Meldungen</h2><p>Hier erscheinen die ersten Beiträge der Redaktion.</p></div>';
+  return `<div class="empty-state"><h2>Keine passende Meldung gefunden</h2><p>Ändere den Suchbegriff oder entferne einen Filter.</p>
+    ${internal('Alle Filter zurücksetzen', {...state, ...emptyFilters}, 'button')}</div>`;
+}
+function groupedFeed(list, state) {
+  return profile.sections.map(section => {
+    const records = list.filter(item => item.section === section.id);
+    if (!records.length) return '';
+    const sectionTitle = esc(section.label);
+    return `<section class="news-section"><div class="section-heading"><h2>${sectionTitle}</h2>
+      ${internal('Alle ansehen ' + icon('arrow'), {...state, ansicht: 'archiv', bereich: section.id, seite: ''}, 'more-link', 'aria-label="Alle Meldungen aus ' + sectionTitle + ' ansehen"')}</div>
+      ${cards(records.slice(0, 3), state)}</section>`;
+  }).join('');
+}
+function archiveTools(state, count) {
+  const reverse = state.sortierung === 'aufsteigend';
+  return `<div class="archive-tools"><p class="result-count" role="status">${countLabel(count)}</p>
+    <div class="archive-actions">${internal(reverse ? 'Älteste zuerst ↑' : 'Neueste zuerst ↓',
+      {...state, sortierung: reverse ? '' : 'aufsteigend', seite: ''}, 'sort-link')}
+    <div class="view-switch" role="group" aria-label="Darstellung">
+    ${[['', 'Liste', 'list'], ['karten', 'Karten', 'grid']].map(([layout, label, glyph]) =>
+      internal(icon(glyph) + ' ' + label, {...state, layout}, 'view-option',
+        state.layout === layout ? 'aria-current="true"' : '')).join('')}
+    </div></div></div>`;
+}
+function archive(list, state) {
+  const lastPage = Math.ceil(list.length / pageSize);
+  const page = Math.min(state.seite || 1, lastPage);
+  const start = (page - 1) * pageSize;
+  const sorted = state.sortierung === 'aufsteigend' ? [...list].reverse() : list;
+  const navigation = lastPage > 1 ? `<nav class="pagination" aria-label="Archivseiten">
+    ${page > 1 ? internal(icon('back') + ' Zurück', {...state, seite: page - 1 === 1 ? '' : page - 1}, 'page-link') : ''}
+    <span>Seite ${page} von ${lastPage}</span>
+    ${page < lastPage ? internal('Weiter ' + icon('arrow'), {...state, seite: page + 1}, 'page-link') : ''}
+    </nav>` : '';
+  return archiveTools(state, sorted.length) + cards(sorted.slice(start, start + pageSize), state,
+    state.layout === 'karten' ? 'card-grid' : 'archive-list') + navigation;
+}
+
+function updateResults(state) {
+  const form = main.querySelector('.filterbar');
+  const filtered = Boolean(state.suche.trim() || state.bereich || state.thema || state.zeitraum);
+  form.elements.suche.placeholder = filtered ? 'Meldungen durchsuchen' : countLabel(items.length) + ' durchsuchen';
+  form.querySelector('.date-fields').hidden = state.zeitraum !== 'frei';
+  main.querySelector('#filter-feedback').innerHTML = filterFeedback(state);
+  const output = main.querySelector('#results');
+  if (state.von && state.bis && state.von > state.bis) {
+    output.innerHTML = '<p class="empty-state" role="alert">Das Enddatum muss am Startdatum oder danach liegen.</p>';
+    return;
+  }
+  const list = matches(state);
+  if (!list.length) {
+    output.innerHTML = `<p class="result-count" role="status">0 Meldungen</p>${emptyState(state)}`;
+    return;
+  }
+  output.innerHTML = state.ansicht === 'archiv' ? archive(list, state) :
+    `<p class="${filtered ? '' : 'sr-only '}result-count" role="status">${countLabel(list.length)}</p>${groupedFeed(list, state)}`;
+}
+
+function topicsPage(state) {
+  const topic = topics.get(state.thema);
+  if (!topic) {
+    return hero({view: 'themen', title: 'Themen', intro: 'Wähle ein Thema und entdecke die neuesten Meldungen.'}) +
+      `<div class="wrap main-content">${topicCards(profile, items)}</div>`;
+  }
+  const list = items.filter(item => item.topics.includes(topic.id));
+  return hero({view: 'thema', kicker: 'Thema', title: topic.label, intro: topic.description}) +
+    `<div class="wrap main-content">
+      ${internal(icon('back') + ' Alle Themen', {ansicht: 'themen'}, 'back-link')}
+      <section class="news-section"><div class="section-heading"><h2>Neueste Meldungen</h2></div>
+      ${list.length ? cards(list.slice(0, 3), state) : '<p>Zu diesem Thema gibt es noch keine Meldungen.</p>'}
+      ${list.length ? `<div class="topic-actions">${internal('Alle Meldungen zu diesem Thema ' + icon('arrow'), {ansicht: 'archiv', thema: topic.id}, 'button')}</div>` : ''}
+      </section></div>`;
+}
+
+function paragraphs(value) {
+  const entries = Array.isArray(value) ? value : String(value || '').split(/\n\s*\n/);
+  return entries.filter(Boolean).map(text => '<p>' + esc(text) + '</p>').join('');
+}
+function detailPage(state) {
+  const item = items.find(record => record.id === state.id);
+  const back = {...state, ansicht: state.rueckweg || 'archiv', rueckweg: '', id: ''};
+  const label = {archiv: 'Alle Meldungen', aktuell: 'Aktuell',
+    themen: topics.get(state.thema)?.label || 'Themen'}[back.ansicht];
+  const backLink = internal(icon('back') + ' ' + esc(label), back, 'back-link');
+  if (!item) {
+    return `<div class="wrap main-content"><div class="empty-state"><h1>Meldung nicht gefunden</h1>${backLink}</div></div>`;
+  }
+  return `<div class="wrap main-content detail-wrap">${backLink}
+    <article class="detail-article"><div class="detail-meta">
+      ${sourceIdentity(item.source)}<time datetime="${esc(item.date)}">${esc(fullDate(item.date))}</time></div>
+      <p class="eyebrow">${esc(sections.get(item.section)?.label)}</p>
+      <h1>${esc(item.title)}</h1><p class="detail-lead">${esc(item.summary)}</p>
+      <div class="detail-body">${paragraphs(item.body)}</div>
+      ${tags(item, topics)}<div class="detail-source">${sourceLink(item.source, 'Zur Originalquelle', 'button')}</div>
+    </article></div>`;
+}
+
+function aboutPage() {
+  return hero({view: 'ueber', title: 'Über ' + profile.name}) +
+    `<div class="wrap main-content"><section class="about-panel"><h2>Das Angebot</h2>
+      ${paragraphs(profile.about)}${profile.publisher ? `<h2>Herausgeber</h2><p>${esc(profile.publisher)}</p>` : ''}
+      ${profile.links?.website ? sourceLink({url: profile.links.website}, 'Zur Website', 'button') : ''}
+    </section></div>`;
+}
+function render() {
+  const state = getState();
+  const view = state.ansicht;
+  const item = view === 'meldung' ? items.find(record => record.id === state.id) : undefined;
+  const titles = {aktuell: 'Aktuell', archiv: 'Alle Meldungen', themen: topics.get(state.thema)?.label || 'Themen',
+    meldung: item?.title || 'Meldung', ueber: 'Über die Website'};
+  document.title = titles[view] + ' | ' + profile.name;
+  const description = item?.summary || (view === 'themen' && topics.get(state.thema)?.description) || profile.intro || profile.name;
+  document.querySelector('meta[name="description"]').content = description;
+  document.querySelector('#masthead').innerHTML = header(profile, view === 'meldung' ? (state.rueckweg || 'archiv') : view);
+  document.querySelector('#colophon').innerHTML = footer(profile);
+  if (view === 'aktuell' || view === 'archiv') {
+    const intro = view === 'aktuell' ? {kicker: profile.kicker, title: profile.headline, highlight: profile.highlight, intro: profile.intro}
+      : {title: 'Alle Meldungen', intro: 'Alle Beiträge nach Datum, Bereich und Thema durchsuchen.'};
+    main.innerHTML = hero({view, ...intro}) + `<div class="wrap main-content">${filterForm(state)}<div id="results"></div></div>`;
+    updateResults(state);
+  } else if (view === 'themen') {
+    main.innerHTML = topicsPage(state);
+  } else if (view === 'meldung') {
+    main.innerHTML = detailPage(state);
+  } else {
+    main.innerHTML = aboutPage();
+  }
+}
+
+function rememberPosition() {
+  history.replaceState({...history.state, top: scrollY}, '', location.href);
+}
+function navigate(url, targetFocus) {
+  rememberPosition();
+  history.pushState({top: 0}, '', url);
+  editingSearch = false;
+  render();
+  const target = targetFocus && main.querySelector(targetFocus);
+  if (target) {
+    target.tabIndex = -1;
+    target.focus();
+  } else {
+    main.focus({preventScroll: true});
+    window.scrollTo(0, 0);
+  }
+}
+document.addEventListener('click', event => {
+  if (location.protocol === 'file:' && event.target.closest('.skip-link')) {
+    event.preventDefault();
+    main.focus();
+    return;
+  }
+  const link = event.target.closest('a[data-route]');
+  if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey ||
+      event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  const focus = link.closest('.pagination, .archive-tools') ? '.archive-tools' :
+    link.closest('.active-filters') ? '[name="suche"]' : '';
+  navigate(link.href, focus);
+});
+window.addEventListener('popstate', () => {
+  if (!profile) return;
+  editingSearch = false;
+  render();
+  window.scrollTo(0, history.state?.top || 0);
+});
+function updateFilters(form, isTyping) {
+  const values = new FormData(form);
+  const state = {...getState(), ...Object.fromEntries(values), seite: ''};
+  if (state.zeitraum !== 'frei') {
+    state.von = '';
+    state.bis = '';
+    form.elements.von.value = '';
+    form.elements.bis.value = '';
+  }
+  const target = route(state);
+  if (new URL(target, location.href).href !== location.href) {
+    const position = {top: scrollY};
+    if (isTyping && editingSearch) history.replaceState(position, '', target);
+    else {
+      rememberPosition();
+      history.pushState(position, '', target);
+    }
+  }
+  editingSearch = isTyping;
+  updateResults(state);
+}
+main.addEventListener('input', event => {
+  if (event.target.name === 'suche') updateFilters(event.target.form, true);
+});
+main.addEventListener('change', event => {
+  if (event.target.form?.matches('.filterbar') && event.target.name !== 'suche') updateFilters(event.target.form, false);
+});
+main.addEventListener('focusout', event => {
+  if (event.target.name === 'suche') editingSearch = false;
+});
+main.addEventListener('submit', event => {
+  if (!event.target.matches('.filterbar')) return;
+  event.preventDefault();
+  updateFilters(event.target, false);
+});
+
+function feedIssue(records) {
+  if (!Array.isArray(records)) return 'Die Feeddatei muss eine JSON-Liste mit Meldungen enthalten.';
+  const ids = new Set();
+  for (const [index, item] of records.entries()) {
+    const entry = item?.id ? 'Meldung „' + item.id + '“' : 'Eintrag ' + (index + 1);
+    if (!item || typeof item.id !== 'string' || !item.id.trim() || ids.has(item.id)) {
+      return entry + ' braucht eine eindeutige, dauerhafte Kennung im Feld id.';
+    }
+    ids.add(item.id);
+    if (typeof item.title !== 'string' || !item.title.trim()) return entry + ' braucht einen Titel.';
+    if (!isDate(item.date)) return entry + ' braucht im Feld date ein gültiges Datum im Format JJJJ-MM-TT.';
+    if (!sections.has(item.section)) return entry + ' braucht im Feld section eine Bereichskennung aus dem Profil.';
+    if (!Array.isArray(item.topics) || item.topics.some(id => !topics.has(id))) return entry + ' braucht im Feld topics eine Liste mit Themenkennungen.';
+    if (!item.source?.name || !webUrl(item.source.url)) return entry + ' braucht eine Originalquelle mit Name und Webadresse.';
+  }
+  return '';
+}
+
+function showLoadError(message) {
+  profile = undefined;
+  main.innerHTML = `<div class="wrap main-content"><h1>Der Feed konnte nicht geladen werden</h1><p>${esc(message)}</p></div>`;
+}
+
+async function loadEdition() {
+  const embedded = document.getElementById('embedded-edition');
+  if (embedded) return JSON.parse(embedded.textContent);
+  const site = await readJson('site.json');
+  const requested = new URLSearchParams(location.search).get('profil');
+  const key = requested && Object.hasOwn(site.profiles, requested) ? requested : site.defaultProfile;
+  const profile = await readJson(site.profiles[key]);
+  return {profile, items: await readJson(profile.feed)};
+}
+
+async function start() {
+  ({profile, items} = await loadEdition());
+  sections = new Map(profile.sections.map(section => [section.id, section]));
+  topics = new Map(profile.topics.map(topic => [topic.id, topic]));
+  const issue = feedIssue(items);
+  if (issue) return showLoadError(issue);
+  items.sort((left, right) => right.date.localeCompare(left.date) || left.id.localeCompare(right.id));
+  const theme = profile.theme || {};
+  document.documentElement.dataset.style = theme.style || 'journal';
+  document.body.dataset.style = document.documentElement.dataset.style;
+  document.documentElement.dataset.artwork = theme.artwork || '';
+  for (const token of ['primary', 'accent', 'tint', 'ink']) {
+    if (theme[token] && CSS.supports('color', theme[token])) document.documentElement.style.setProperty('--' + token, theme[token]);
+  }
+  if (theme.primary) document.querySelector('meta[name="theme-color"]').content = theme.primary;
+  const logo = logoUrl(profile.logo);
+  if (logo) document.querySelector('#site-icon').href = logo;
+  history.scrollRestoration = 'manual';
+  render();
+}
+start().catch(() => showLoadError('Prüfe den Zugriff auf Profil und Feeddatei und lade die Seite erneut.'));
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt</a>
+  <div id="masthead"></div>
+  <main id="inhalt" tabindex="-1">
+    <div class="wrap"><p role="status">Meldungen werden geladen.</p></div>
+  </main>
+  <noscript><p>Bitte aktiviere JavaScript, um die Meldungen zu lesen.</p></noscript>
+  <div id="colophon"></div>
+</body>
+</html>

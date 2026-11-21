@@ -13,6 +13,19 @@ export function webUrl(value) {
   }
 }
 
+export function logoUrl(value) {
+  if (/^data:image\/(?:svg\+xml|png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(value)) return value;
+  return webUrl(value);
+}
+
+export function routeQuery() {
+  // A local file can change its fragment without changing its file URL.
+  if (location.protocol === 'file:' && location.hash.startsWith('#?')) {
+    return new URLSearchParams(location.hash.slice(2));
+  }
+  return new URLSearchParams(location.search);
+}
+
 const symbols = {
   search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
   arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>',
@@ -39,11 +52,12 @@ export function icon(name) {
 
 export function route(parameters = {}) {
   const query = new URLSearchParams();
-  const profile = new URLSearchParams(location.search).get('profil');
+  const profile = routeQuery().get('profil');
   if (profile) query.set('profil', profile);
   for (const [key, value] of Object.entries(parameters)) {
     if (value !== '' && value != null) query.set(key, value);
   }
+  if (location.protocol === 'file:') return '#?' + query;
   return location.pathname + (query.size ? '?' + query : '');
 }
 
@@ -57,7 +71,7 @@ function outbound(label, value, className = '') {
 }
 
 export function brand(profile) {
-  const logo = webUrl(profile.logo);
+  const logo = logoUrl(profile.logo);
   const isWordmark = Boolean(logo && profile.logoMode === 'wordmark');
   const image = logo ? `<img class="${isWordmark ? 'brand-wordmark' : 'brand-mark'}" src="${escapeHtml(logo)}" alt="" height="44">` : '';
   return image + (isWordmark ? '' : `<span class="brand-name">${escapeHtml(profile.name)}</span>`);

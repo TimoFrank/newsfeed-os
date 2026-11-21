@@ -1,4 +1,4 @@
-import {escapeHtml as esc, webUrl, icon, route, internal, header, footer, hero,
+import {escapeHtml as esc, webUrl, logoUrl, icon, route, routeQuery, internal, header, footer, hero,
   fullDate, sourceIdentity, sourceLink, tags, newsCard, topicCards} from './ui.js';
 
 const main = document.querySelector('#inhalt');
@@ -28,7 +28,7 @@ function normalize(value) {
 }
 
 function getState() {
-  const query = new URLSearchParams(location.search);
+  const query = routeQuery();
   const view = query.get('ansicht');
   const period = query.get('zeitraum');
   const page = Number(query.get('seite'));
@@ -265,6 +265,11 @@ function navigate(url, targetFocus) {
   }
 }
 document.addEventListener('click', event => {
+  if (location.protocol === 'file:' && event.target.closest('.skip-link')) {
+    event.preventDefault();
+    main.focus();
+    return;
+  }
   const link = event.target.closest('a[data-route]');
   if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey ||
       event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -289,7 +294,7 @@ function updateFilters(form, isTyping) {
     form.elements.bis.value = '';
   }
   const target = route(state);
-  if (target !== location.pathname + location.search) {
+  if (new URL(target, location.href).href !== location.href) {
     const position = {top: scrollY};
     if (isTyping && editingSearch) history.replaceState(position, '', target);
     else {
@@ -338,14 +343,20 @@ function showLoadError(message) {
   main.innerHTML = `<div class="wrap main-content"><h1>Der Feed konnte nicht geladen werden</h1><p>${esc(message)}</p></div>`;
 }
 
-async function start() {
+async function loadEdition() {
+  const embedded = document.getElementById('embedded-edition');
+  if (embedded) return JSON.parse(embedded.textContent);
   const site = await readJson('site.json');
   const requested = new URLSearchParams(location.search).get('profil');
   const key = requested && Object.hasOwn(site.profiles, requested) ? requested : site.defaultProfile;
-  profile = await readJson(site.profiles[key]);
+  const profile = await readJson(site.profiles[key]);
+  return {profile, items: await readJson(profile.feed)};
+}
+
+async function start() {
+  ({profile, items} = await loadEdition());
   sections = new Map(profile.sections.map(section => [section.id, section]));
   topics = new Map(profile.topics.map(topic => [topic.id, topic]));
-  items = await readJson(profile.feed);
   const issue = feedIssue(items);
   if (issue) return showLoadError(issue);
   items.sort((left, right) => right.date.localeCompare(left.date) || left.id.localeCompare(right.id));
@@ -357,7 +368,8 @@ async function start() {
     if (theme[token] && CSS.supports('color', theme[token])) document.documentElement.style.setProperty('--' + token, theme[token]);
   }
   if (theme.primary) document.querySelector('meta[name="theme-color"]').content = theme.primary;
-  if (webUrl(profile.logo)) document.querySelector('#site-icon').href = webUrl(profile.logo);
+  const logo = logoUrl(profile.logo);
+  if (logo) document.querySelector('#site-icon').href = logo;
   history.scrollRestoration = 'manual';
   render();
 }
