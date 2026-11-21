@@ -1,0 +1,59 @@
+{
+  "name": "Orbitbrief",
+  "logo": "assets/orbit.svg",
+  "kicker": "Raumfahrt",
+  "headline": "Nachrichten aus dem",
+  "highlight": "Weltraum",
+  "intro": "Missionen, Messdaten und Entdeckungen aus der europäischen Raumfahrt.",
+  "about": "Orbitbrief verfolgt europäische Raumfahrtmissionen. Zu jeder Meldung lässt sich nachlesen, welche Beobachtung bereits vorliegt und welche Fragen die Mission als Nächstes untersucht.",
+  "publisher": "Orbitbrief (Beispielredaktion)",
+  "theme": {
+    "style": "atlas",
+    "artwork": "umlaufbahn",
+    "primary": "#193765",
+    "accent": "#375dc3",
+    "tint": "#edf1fb",
+    "ink": "#182848"
+  },
+  "sections": [
+    {
+      "id": "mission",
+      "label": "Missionen"
+    },
+    {
+      "id": "forschung",
+      "label": "Forschung"
+    },
+    {
+      "id": "daten",
+      "label": "Daten"
+    }
+  ],
+  "topics": [
+    {
+      "id": "sonnensystem",
+      "label": "Sonnensystem",
+      "description": "Begegnungen mit Asteroiden und neue Perspektiven auf die Sonne.",
+      "icon": "orbit"
+    },
+    {
+      "id": "erde",
+      "label": "Erdbeobachtung",
+      "description": "Was Satelliten über die Atmosphäre, Wälder und Meere verraten.",
+      "icon": "globe"
+    },
+    {
+      "id": "kosmos",
+      "label": "Ferner Kosmos",
+      "description": "Weltraumteleskope beobachten Galaxien und ihre Entwicklung.",
+      "icon": "telescope"
+    },
+    {
+      "id": "beobachtung",
+      "label": "Bildgebung",
+      "description": "Wie Instrumente aus Messwerten Bilder machen.",
+      "icon": "sun"
+    }
+  ],
+  "feed": "feeds/orbit.json"
+}

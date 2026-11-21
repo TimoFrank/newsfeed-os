@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <title>Stadtlabor</title>
+  <g fill="#184c40">
+    <path d="M2 4h18v12H2zM2 20h10v9H2zM16 20h4v12H2v-1h14zM24 4h22v7H31v5h-7z"/>
+    <path d="M2 36h18v8H2zM24 21h5c.8 6.8 6.3 12.2 13 13v10H24z"/>
+  </g>
+  <path fill="#b54d2c" d="M33 15h13v15c-7.2-.3-12.8-6.6-13-15z"/>
+</svg>

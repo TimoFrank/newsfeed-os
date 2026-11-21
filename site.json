@@ -1,0 +1,7 @@
+{
+  "defaultProfile": "stadtlabor",
+  "profiles": {
+    "stadtlabor": "profiles/stadtlabor.json",
+    "orbit": "profiles/orbit.json"
+  }
+}

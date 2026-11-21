@@ -1,0 +1,112 @@
+[
+  {
+    "id": "didymos-in-3d",
+    "title": "Zwei Aufnahmen zeigen Didymos in drei Dimensionen",
+    "summary": "Aus einem Bildpaar der Raumsonde Hera hat der Astrophysiker Brian May eine räumliche Ansicht des Asteroiden zusammengesetzt.",
+    "body": "Die Aufnahmen entstanden am 6. November aus rund 30 Kilometern Entfernung. In der räumlichen Darstellung lässt sich der glatte Rücken am Äquator von der steinigen Umgebung unterscheiden.",
+    "date": "2026-11-19",
+    "section": "forschung",
+    "topics": [
+      "sonnensystem",
+      "beobachtung"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/sir-brian-may-adds-new-dimension-to-hera-asteroid"
+    }
+  },
+  {
+    "id": "hera-am-ziel",
+    "title": "Hera erreicht das Asteroidenpaar Didymos und Dimorphos",
+    "summary": "Nach zwei Jahren Flug soll die europäische Sonde untersuchen, wie der Einschlag der NASA-Sonde DART den kleineren der beiden Asteroiden verändert hat.",
+    "body": "Für den 25. November kündigte die ESA an, erste Nahaufnahmen von Dimorphos zu zeigen. Die Messungen sollen helfen, die Wirkung einer gezielten Ablenkung von Asteroiden besser abzuschätzen.",
+    "date": "2026-11-18",
+    "section": "mission",
+    "topics": [
+      "sonnensystem"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/watch-live-hera-s-first-images-of-post-impact-asteroid-dimorphos"
+    }
+  },
+  {
+    "id": "sentinel-1d",
+    "title": "Ein zweiter Radarblick für Copernicus",
+    "summary": "Eine Ariane 6 hat Sentinel-1D in die Umlaufbahn gebracht. Zusammen mit seinem Schwestersatelliten soll er die Erde regelmäßiger erfassen.",
+    "body": "Radar arbeitet auch nachts und bei Wolken. Die Beobachtungen können beispielsweise nach Katastrophen und für die Überwachung von Meeresgebieten eingesetzt werden.",
+    "date": "2025-11-04",
+    "section": "mission",
+    "topics": [
+      "erde",
+      "beobachtung"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/media/copernicus-sentinel-1d-launch-coverage"
+    }
+  },
+  {
+    "id": "sentinel-4",
+    "title": "Ein Instrument für stündliche Luftmessungen über Europa",
+    "summary": "Der erste europäische Wettersatellit der Reihe MTG-S ist mit dem Instrument Sentinel-4 gestartet. Es ist für die Beobachtung von Luftschadstoffen ausgelegt.",
+    "body": "Sentinel-4 misst vom geostationären Orbit aus. Von dort blickt das Instrument über längere Zeit auf dasselbe Gebiet und kann Veränderungen im Tagesverlauf erfassen.",
+    "date": "2025-07-01",
+    "section": "mission",
+    "topics": [
+      "erde"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/ESA_Multimedia/Images/2025/07/MTG-S1_and_Sentinel-4_launch"
+    }
+  },
+  {
+    "id": "biomass",
+    "title": "Biomass liefert erste Radarbilder von Wäldern",
+    "summary": "Die ESA zeigt erste Aufnahmen ihres neuen Radarsatelliten. Später soll er Daten darüber liefern, wie viel Kohlenstoff in Wäldern gebunden ist.",
+    "body": "Die Bilder stammen aus der Kalibrierungsphase. Für belastbare Aussagen über Kohlenstoffvorräte war dieser erste Datensatz noch zu früh.",
+    "date": "2025-06-23",
+    "section": "daten",
+    "topics": [
+      "erde",
+      "beobachtung"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/Applications/Observing_the_Earth/FutureEO/Biomass/Biomass_satellite_returns_striking_first_images_of_forests_and_more"
+    }
+  },
+  {
+    "id": "solar-orbiter",
+    "title": "Solar Orbiter blickt auf den Südpol der Sonne",
+    "summary": "Von einer geneigten Flugbahn aus hat die Sonde die südliche Polarregion aufgenommen. Von der Erde ist dieser Blickwinkel unerreichbar.",
+    "body": "Drei Instrumente beobachteten die Region im März. Die Messungen liefern unter anderem Informationen zum Magnetfeld an den Polen der Sonne.",
+    "date": "2025-06-11",
+    "section": "forschung",
+    "topics": [
+      "sonnensystem",
+      "beobachtung"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter/Solar_Orbiter_gets_world-first_views_of_the_Sun_s_poles"
+    }
+  },
+  {
+    "id": "euclid",
+    "title": "Euclid öffnet ein Fenster zu fernen Galaxien",
+    "summary": "Die erste Veröffentlichung von Durchmusterungsdaten des Weltraumteleskops umfasst auch einen Blick in drei besonders tief beobachtete Himmelsfelder.",
+    "body": "Die Daten ermöglichen es, die Formen und die Verteilung von Galaxien zu untersuchen. Dabei lassen sich auch Kandidaten für Gravitationslinsen finden.",
+    "date": "2025-03-19",
+    "section": "daten",
+    "topics": [
+      "kosmos",
+      "beobachtung"
+    ],
+    "source": {
+      "name": "ESA",
+      "url": "https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_opens_data_treasure_trove_offers_glimpse_of_deep_fields"
+    }
+  }
+]

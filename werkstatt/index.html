@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eigene Ausgabe einrichten | Themenfeed</title>
+  <link rel="stylesheet" href="form.css"><script defer src="form.js"></script>
+</head>
+<body>
+<header><div class="shell bar"><strong><img src="themenfeed.svg" width="29" height="29" alt="">Themenfeed</strong><a href="/">Zur Beispielwebsite ↗</a></div></header>
+<main class="shell">
+  <h1>Eigene Ausgabe einrichten</h1>
+  <p class="lead">Wähle einen Ausgangspunkt. Dein fertiges Paket enthält die Website und ihre bearbeitbaren Inhalte.</p>
+  <div class="columns">
+    <form id="editor">
+      <fieldset><legend>Ausgabe</legend>
+        <label>Ausgangspunkt<select id="basis" name="basis" required></select></label>
+        <div class="pair"><label>Name der Website<input name="name" required maxlength="90"></label><label>Themenzeile<input name="kicker" maxlength="90"></label></div>
+        <div class="pair"><label>Überschrift<input name="headline" required></label><label>Farbiger Titelteil<input name="highlight"></label></div>
+        <label>Einleitung<textarea name="intro" rows="2"></textarea></label>
+      </fieldset>
+      <fieldset><legend>Gestaltung</legend>
+        <label>Satzstil<select name="style"><option value="journal">Journal mit Serifenschrift</option><option value="atlas">Atlas mit Groteskschrift</option></select></label>
+        <label>Kopfmotiv<select name="artwork"><option value="">Ohne Motiv</option><option value="stadtplan">Stadtplan</option><option value="umlaufbahn">Umlaufbahnen</option></select></label>
+        <div class="swatches">
+          <label>Hauptfarbe<input type="color" name="primary"></label><label>Akzent<input type="color" name="accent"></label>
+          <label>Hintergrund<input type="color" name="tint"></label><label>Text<input type="color" name="ink"></label>
+        </div>
+        <label>Eigenes Logo <small>PNG oder JPEG, bis 2 MB</small><input name="logo" type="file" accept="image/png,image/jpeg"></label>
+        <label class="check"><input name="wordmark" type="checkbox">Mein Logo enthält bereits den Namen</label>
+        <label class="check"><input name="keepLogo" type="checkbox">Ohne Upload das Beispielzeichen verwenden</label>
+      </fieldset>
+      <details><summary>Themen und Meldungen</summary><div>
+        <label>Bereiche <small>Ein Name pro Zeile</small><textarea name="sections" rows="3" required></textarea></label>
+        <label>Themen <small>Ein Name pro Zeile</small><textarea name="topics" rows="4" required></textarea></label>
+        <label class="check"><input name="includeNews" type="checkbox">Beispielmeldungen in meine Ausgabe übernehmen</label>
+      </div></details>
+      <details><summary>Herausgeber und Links</summary><div>
+        <label>Herausgeber<input name="publisher" required></label><label>Über die Website<textarea name="about" rows="3"></textarea></label>
+        <label>Website<input name="website" type="url"></label><label>Newsletter<input name="newsletter" type="url"></label>
+        <label>Impressum<input name="impressum" type="url"></label><label>Datenschutz<input name="datenschutz" type="url"></label>
+      </div></details>
+      <div class="actions"><button id="preview" type="submit" value="vorschau">Vorschau aktualisieren</button><button id="zip" type="submit" value="paket">Website herunterladen</button></div>
+      <p id="status" role="status"></p>
+    </form>
+    <section class="preview"><div class="preview-head"><h2>Vorschau</h2><a id="open-preview" hidden target="_blank" rel="noopener">Groß öffnen ↗</a></div>
+      <iframe id="frame" title="Vorschau der eigenen Ausgabe" src="about:blank"></iframe>
+    </section>
+  </div>
+</main>
+</body>
+</html>

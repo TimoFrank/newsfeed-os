@@ -1,0 +1,207 @@
+[
+  {
+    "id": "hopfenmarkt",
+    "title": "Hamburg macht aus dem Hopfenmarkt wieder einen Stadtplatz",
+    "summary": "Wo heute Autos parken, sollen künftig Menschen sitzen, Boule spielen und im Schatten von Bäumen eine Pause machen. Der Umbau hat begonnen.",
+    "body": "Vor dem Mahnmal St. Nikolai plant Hamburg 13 zusätzliche Bäume und lange Bänke. Im Pflaster soll der Verlauf eines mittelalterlichen Walls sichtbar werden. Wer zu Fuß zwischen Rathaus und Speicherstadt unterwegs ist, soll die Straßen leichter queren können.",
+    "date": "2026-11-17",
+    "section": "praxis",
+    "topics": [
+      "stadtraum",
+      "mobilitaet"
+    ],
+    "source": {
+      "name": "Bezirksamt Hamburg-Mitte",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/aktuelles/pressemitteilungen/baustart-am-hopfenmarkt-1238284"
+    }
+  },
+  {
+    "id": "wandse-aue",
+    "title": "An der Wandse bekommt das Wasser mehr Platz",
+    "summary": "Hamburg vergrößert die Aue nördlich des Ostender Teichs. Bei Starkregen soll sie Wasser aufnehmen, bevor die Wege überfluten.",
+    "body": "Drei Stege sollen den Zugang zum Ufer ermöglichen. Für Menschen zu Fuß und auf dem Rad sind getrennte Wege vorgesehen. Den Abschluss der Arbeiten plant der Bezirk für das Frühjahr 2027.",
+    "date": "2026-11-11",
+    "section": "praxis",
+    "topics": [
+      "stadtgruen",
+      "mobilitaet"
+    ],
+    "source": {
+      "name": "Bezirksamt Wandsbek",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/aktuelles/2026-11-11-aufwertung-an-der-wandse-aue-1236292"
+    }
+  },
+  {
+    "id": "stremelkamp",
+    "title": "Ein Platz zum Klettern, Boule spielen und Zusammensitzen",
+    "summary": "Am Stremelkamp in Hamburg hat der Bezirk einen Spielplatz erneuert. Neben dem Ballsportfeld gibt es jetzt auch Platz für jüngere Kinder.",
+    "body": "Neue Bänke und eine Boulefläche ergänzen die Spielgeräte. Zur Einweihung am 18. November lud der Bezirk die Nachbarschaft ein.",
+    "date": "2026-11-09",
+    "section": "praxis",
+    "topics": [
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Bezirksamt Harburg",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/harburg/aktuelles/pressemeldungen/neuer-spiel-und-aktivplatz-stremelkamp-1235992"
+    }
+  },
+  {
+    "id": "platz-der-luftbruecke",
+    "title": "Wie der Platz der Luftbrücke Regen für seine Bäume sammelt",
+    "summary": "Der Berliner Entwurf erhält den zweiten Platz beim Deutschen Verkehrsplanungspreis. Er verbindet den Umbau der Verkehrsflächen mit der Bewässerung des Stadtgrüns.",
+    "body": "Regen von Fahrbahn und Gehwegen soll künftig zu den Bäumen und in bepflanzte Mulden fließen. Unterirdische Speicher nehmen zusätzlich Wasser auf und lassen es nach und nach versickern.",
+    "date": "2026-11-08",
+    "section": "planung",
+    "topics": [
+      "mobilitaet",
+      "stadtgruen",
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Land Berlin",
+      "url": "https://www.berlin.de/sen/uvk/presse/pressemitteilungen/2026/pressemitteilung.1736304.php"
+    }
+  },
+  {
+    "id": "alstervorland",
+    "title": "Mehr Raum für Radverkehr am Hamburger Alsterufer",
+    "summary": "Hamburg stellt Pläne für das Ufer zwischen Kennedybrücke und Lohmühlenstraße vor. Ein breiter Radweg soll Engstellen am Wasser entschärfen.",
+    "body": "An stark genutzten Abschnitten soll der Radweg näher an die Fahrbahn rücken. Östlich der Brücke sind barrierefreie Zugänge vorgesehen. Die Stadt plant den Baubeginn für April 2028.",
+    "date": "2026-11-05",
+    "section": "planung",
+    "topics": [
+      "mobilitaet",
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Stadt Hamburg",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bvm/aktuelles/pressemeldungen/alstervorland-zwischen-kennedybruecke-und-lohmuehlenstrasse-wird-aufgewertet-1234946"
+    }
+  },
+  {
+    "id": "mini-wald",
+    "title": "Ein kleiner Wald für Schnelsen",
+    "summary": "In Hamburg-Schnelsen ist ein Waldstück mit rund 2.800 Bäumen geplant. Bei der Pflanzung können die Menschen aus dem Stadtteil mitmachen.",
+    "body": "Der Bezirk hat eine ehemalige Ackerfläche am Vielohweg ausgewählt. Mehr als 30 Baumarten sollen dort dicht beieinander wachsen. Zum gemeinsamen Pflanzen lädt der Bezirk am 28. November ein.",
+    "date": "2026-10-29",
+    "section": "praxis",
+    "topics": [
+      "stadtgruen"
+    ],
+    "source": {
+      "name": "Bezirksamt Eimsbüttel",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/bezirksamt-eimsbuettel/aktuelles/pressemeldungen/mini-wald-entsteht-in-schnelsen-jede-r-kann-mitpflanzen--1232524"
+    }
+  },
+  {
+    "id": "hammer-park",
+    "title": "Im Hammer Park entsteht ein Haus für mehrere Generationen",
+    "summary": "Hamburg baut im Park einen gemeinsamen Treffpunkt für Jugendliche, Familien mit kleinen Kindern und ältere Menschen.",
+    "body": "Das Otto-Linne-Haus soll rund 1.100 Quadratmeter umfassen. Bei einer Beteiligung im Vorjahr wurde der Name des Landschaftsarchitekten gewählt, der den Park geprägt hat.",
+    "date": "2026-10-29",
+    "section": "praxis",
+    "topics": [
+      "quartiere",
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Bezirksamt Hamburg-Mitte",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/mitte/aktuelles/pressemitteilungen/baubeginn-otto-linne-haus-hammer-park-1232496"
+    }
+  },
+  {
+    "id": "molkenmarkt-durchgang",
+    "title": "Ein neuer Durchgang für das Quartier am Molkenmarkt",
+    "summary": "Eine Änderung des Bebauungsplans soll in einem Baublock neue Wohnungen und eine öffentlich nutzbare Verbindung ermöglichen.",
+    "body": "Die Planänderung betrifft auch die Grünfläche neben dem bestehenden Haus Klosterstraße 44. Zu welchem Zeitpunkt die Öffentlichkeit sich beteiligen kann, will die Verwaltung gesondert mitteilen.",
+    "date": "2026-09-14",
+    "section": "planung",
+    "topics": [
+      "quartiere",
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Projekt Molkenmarkt Berlin",
+      "url": "https://molkenmarkt.berlin.de/2026/09/14/aufstellung-des-bebauungsplans-1-14-2-grundlage-fuer-die-schaffung-von-wohnraum-am-molkenmarkt-gelegt/"
+    }
+  },
+  {
+    "id": "schumacher-quartier",
+    "title": "In Tegel beginnt der Bau der ersten 327 Wohnungen",
+    "summary": "Auf dem früheren Flughafengelände startet der Wohnungsbau im Schumacher Quartier. Die Hälfte der ersten Wohnungen wird öffentlich gefördert.",
+    "body": "Auf zwei Baufeldern entstehen außerdem Gewerberäume und eine Kita. Vorgesehen sind Gebäude in Holzhybridbauweise und eine Gestaltung, die Regenwasser im Quartier hält.",
+    "date": "2026-09-03",
+    "section": "praxis",
+    "topics": [
+      "quartiere",
+      "stadtgruen"
+    ],
+    "source": {
+      "name": "Bezirksamt Reinickendorf",
+      "url": "https://www.berlin.de/ba-reinickendorf/aktuelles/pressemitteilungen/2026/pressemitteilung.1710146.php"
+    }
+  },
+  {
+    "id": "tegelsbarg",
+    "title": "Tegelsbarg eröffnet seinen neu gestalteten Quartierspark",
+    "summary": "Die Hamburger Parkanlage verbindet Laufstrecke, Spielplätze und ruhige Grünflächen. Kinder und Erwachsene aus dem Quartier haben Ideen beigetragen.",
+    "body": "Zum Gelände gehören ein Pumptrack, Tischtennisplatten und eine Skateanlage. Wege im zentralen Parkbereich erhielten einen Belag, der sich im Sommer weniger aufheizen soll.",
+    "date": "2026-06-20",
+    "section": "praxis",
+    "topics": [
+      "stadtgruen",
+      "quartiere"
+    ],
+    "source": {
+      "name": "Bezirksamt Wandsbek",
+      "url": "https://www.hamburg.de/politik-und-verwaltung/bezirke/wandsbek/aktuelles/einweihung-der-neugestalteten-parkanlage-tegelsbarg-1189460"
+    }
+  },
+  {
+    "id": "berlin-regenwasser",
+    "title": "Berlin will Regenwasser dort nutzen, wo es fällt",
+    "summary": "Der Senat setzt beim Umbau zur Schwammstadt auf entsiegelte Böden, begrünte Dächer und Regenwasser für die Bewässerung.",
+    "body": "Für öffentliche und private Grundstücke liegen Karten vor, die zeigen, wo versiegelte Flächen vom Kanalnetz abgekoppelt werden könnten. Bei landeseigenen Flächen will die Stadt schrittweise vorgehen.",
+    "date": "2026-06-09",
+    "section": "planung",
+    "topics": [
+      "stadtgruen"
+    ],
+    "source": {
+      "name": "Berliner Senat",
+      "url": "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1679421.php"
+    }
+  },
+  {
+    "id": "berlin-molkenmarkt",
+    "title": "Wohnungen und ein Kulturhaus für Berlins historische Mitte",
+    "summary": "Der Senat hat einen Planentwurf für den Molkenmarkt beschlossen. Er sieht zusätzliche gebundene Wohnungen und neue Räume für Gewerbe und Kultur vor.",
+    "body": "An der Stralauer Straße sollen Bühnen und Ausstellungsräume entstehen. Der nächste Schritt ist die Befassung des Abgeordnetenhauses mit dem Entwurf.",
+    "date": "2026-05-19",
+    "section": "planung",
+    "topics": [
+      "quartiere",
+      "stadtraum"
+    ],
+    "source": {
+      "name": "Berliner Senat",
+      "url": "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1672182.php"
+    }
+  },
+  {
+    "id": "schwammstadt",
+    "title": "Was Städte gegen Hitze und Starkregen tun können",
+    "summary": "Das Umweltbundesamt zeigt, wie Kommunen Wasser im Stadtgebiet zurückhalten und für trockene Tage verfügbar machen können.",
+    "body": "Das Amt empfiehlt unter anderem bessere Daten zu Grünflächen und Gewässern. Solche Informationen helfen Kommunen, geeignete Flächen für den Umbau zu finden und ihre Fortschritte zu verfolgen.",
+    "date": "2024-07-03",
+    "section": "wissen",
+    "topics": [
+      "stadtgruen"
+    ],
+    "source": {
+      "name": "Umweltbundesamt",
+      "url": "https://www.umweltbundesamt.de/presse/pressemitteilungen/staedte-widerstandsfaehig-gegen"
+    }
+  }
+]

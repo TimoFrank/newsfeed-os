@@ -1,0 +1,59 @@
+{
+  "name": "Stadtlabor",
+  "logo": "assets/stadtlabor.svg",
+  "kicker": "Stadtentwicklung",
+  "headline": "Wie sich unsere",
+  "highlight": "Städte verändern",
+  "intro": "Neue Wege, grüne Quartiere und öffentliche Plätze im Wandel.",
+  "about": "Stadtlabor sammelt Beispiele aus der Stadtentwicklung. Wie wird aus einem Parkplatz ein Stadtplatz? Wo bleibt der Regen nach einem Gewitter? Die Meldungen führen zu den Plänen, Berichten und Entscheidungen der verantwortlichen Stellen.",
+  "publisher": "Stadtlabor (Beispielredaktion)",
+  "theme": {
+    "style": "journal",
+    "artwork": "stadtplan",
+    "primary": "#174b40",
+    "accent": "#a33e21",
+    "tint": "#f2f4ed",
+    "ink": "#172e28"
+  },
+  "sections": [
+    {
+      "id": "praxis",
+      "label": "Vor Ort"
+    },
+    {
+      "id": "planung",
+      "label": "Planung"
+    },
+    {
+      "id": "wissen",
+      "label": "Hintergrund"
+    }
+  ],
+  "topics": [
+    {
+      "id": "stadtraum",
+      "label": "Öffentlicher Raum",
+      "description": "Wie sich Plätze, Parks und Treffpunkte im Alltag nutzen lassen.",
+      "icon": "building"
+    },
+    {
+      "id": "stadtgruen",
+      "label": "Stadtgrün",
+      "description": "Bäume, Regenwasser und der Umgang mit Hitze in der Stadt.",
+      "icon": "leaf"
+    },
+    {
+      "id": "mobilitaet",
+      "label": "Mobilität",
+      "description": "Neue Wege für Menschen zu Fuß und auf dem Rad.",
+      "icon": "route"
+    },
+    {
+      "id": "quartiere",
+      "label": "Wohnen und Quartier",
+      "description": "Wo Wohnungen entstehen und wie Nachbarschaften wachsen.",
+      "icon": "layers"
+    }
+  ],
+  "feed": "feeds/stadtlabor.json"
+}
