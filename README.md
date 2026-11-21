@@ -1,4 +1,4 @@
-# <img src="werkstatt/themenfeed.svg" width="32" alt="" align="absmiddle"> Themenfeed
+# <img src="werkstatt/newsfeed-os.svg" width="32" alt="" align="absmiddle"> Newsfeed OS
 
 Baue eine Nachrichtenseite für ein Thema, das du regelmäßig verfolgst. Du bestimmst, welche Quellen und Meldungen hineingehören. Deine Leser finden die neuesten Beiträge auf der Startseite, können das Archiv durchsuchen und mit einem Klick die Originalquelle öffnen.
 

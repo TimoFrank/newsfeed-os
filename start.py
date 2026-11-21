@@ -1,4 +1,4 @@
-"""Lokale Vorschau und Export für Themenfeed. Benötigt nur Python ab 3.9."""
+"""Lokale Vorschau und Export für Newsfeed OS. Benötigt nur Python ab 3.9."""
 import argparse
 import base64
 import binascii
@@ -166,7 +166,7 @@ class Server(BaseHTTPRequestHandler):
             if path.startswith("einrichten/"):
                 path = "werkstatt/" + path.removeprefix("einrichten/")
             allowed = (path in RESOURCES or parts[0] in ("assets", "profiles", "feeds")
-                       or path in ("werkstatt/index.html", "werkstatt/form.js", "werkstatt/form.css", "werkstatt/themenfeed.svg"))
+                       or path in ("werkstatt/index.html", "werkstatt/form.js", "werkstatt/form.css", "werkstatt/newsfeed-os.svg"))
             file = (ROOT / path).resolve()
             if not allowed or ROOT not in file.parents or not file.is_file():
                 return self.send_error(404)
